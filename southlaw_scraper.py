@@ -10,7 +10,6 @@ pdf_file = BytesIO(response.content)
 
 records = []
 current_county = None
-collecting = False  # flag to start/stop saving rows
 
 with pdfplumber.open(pdf_file) as pdf:
     for page in pdf.pages:
@@ -19,29 +18,20 @@ with pdfplumber.open(pdf_file) as pdf:
             continue
 
         for line in text.split("\n"):
-            # Detect county header lines
+            # Detect county headings (allow periods)
             if re.match(r"^[A-Z\s.]+$", line.strip()) and len(line.strip()) > 3:
-                county_name = line.strip().title()
-
-                if county_name == "St. Louis":
-                    collecting = True
-                elif county_name == "Stone":
-                    collecting = False
-
-                current_county = county_name
+                current_county = line.strip().title()
+                print(f"Detected county: {current_county}")
                 continue
 
-            # Skip header row
+            # Skip header rows
             if "Property Address" in line:
                 continue
 
-            if not collecting:
-                continue  # skip rows outside desired range
-
-            # Split into columns (working backwards)
+            # Split row by spaces
             parts = line.strip().split()
             if len(parts) < 10:
-                continue  # not enough columns
+                continue
 
             firm_file = parts[-1]
             civil_case = parts[-2]
@@ -68,8 +58,8 @@ with pdfplumber.open(pdf_file) as pdf:
                 "firm_file": firm_file
             })
 
-# Save JSON
+# Save to JSON
 with open("sales_report.json", "w", encoding="utf-8") as f:
     json.dump(records, f, indent=4)
 
-print(f"Extracted {len(records)} records between St. Louis and Stone.")
+print(f"Extracted {len(records)} records.")
