@@ -18,42 +18,47 @@ with pdfplumber.open(pdf_file) as pdf:
             continue
 
         for line in text.split("\n"):
-            # Detect county headers (all caps, no digits, longer than 3 chars)
+            # Detect county name lines
             if re.match(r"^[A-Z\s]+$", line.strip()) and len(line.strip()) > 3:
                 current_county = line.strip().title()
                 continue
 
-            # Skip column header lines
+            # Skip header rows
             if "Property Address" in line:
                 continue
 
-            # Try to match data line
-            # Regex Explanation:
-            #   ^(?P<address>.*?)  -> Property Address (non-greedy)
-            #   \s+(?P<city>[A-Za-z.\s]+) -> Property City
-            #   \s+(?P<zip>\d{5}) -> Zip Code
-            #   \s+(?P<sale_date>\d{1,2}/\d{1,2}/\d{4})
-            #   \s+(?P<sale_time>\d{1,2}:\d{2}[APM]+)
-            #   \s+(?P<continued>.*?) -> Continued Date/Time (can be N/A)
-            #   \s+(?P<bid>.*?) -> Opening Bid (can be N/A)
-            #   \s+(?P<sale_city>[A-Za-z.\s]+) -> Sale Location City
-            #   \s+(?P<civil_case>\d+) -> Civil Case No
-            #   \s+(?P<firm_file>\d+)$ -> Firm File#
-            pattern = re.compile(
-                r"^(?P<address>.+?)\s+(?P<city>[A-Za-z.\s]+)\s+(?P<zip>\d{5})\s+"
-                r"(?P<sale_date>\d{1,2}/\d{1,2}/\d{4})\s+(?P<sale_time>\d{1,2}:\d{2}[APM]+)\s+"
-                r"(?P<continued>(?:\d{1,2}/\d{1,2}/\d{4}\s+\d{1,2}:\d{2}[APM]+|N/A))\s+"
-                r"(?P<bid>.+?)\s+(?P<sale_city>[A-Za-z.\s]+)\s+"
-                r"(?P<civil_case>\d+)\s+(?P<firm_file>\d+)$"
-            )
+            # Split the row by spaces
+            parts = line.strip().split()
+            if len(parts) < 10:
+                continue  # too short to be valid data
 
-            match = pattern.match(line.strip())
-            if match:
-                record = match.groupdict()
-                record["county"] = current_county
-                records.append(record)
+            # Assign fields from the end backwards (most reliable)
+            firm_file = parts[-1]
+            civil_case = parts[-2]
+            sale_city = parts[-3]
+            bid = parts[-4]
+            continued = parts[-5]
+            sale_time = parts[-6]
+            sale_date = parts[-7]
+            zip_code = parts[-8]
+            city = parts[-9]
+            address = " ".join(parts[0:-9])
 
-# Save results
+            records.append({
+                "county": current_county,
+                "property_address": address,
+                "property_city": city,
+                "property_zip": zip_code,
+                "sale_date": sale_date,
+                "sale_time": sale_time,
+                "continued_date_time": continued,
+                "opening_bid": bid,
+                "sale_location_city": sale_city,
+                "civil_case_no": civil_case,
+                "firm_file": firm_file
+            })
+
+# Save JSON
 with open("sales_report.json", "w", encoding="utf-8") as f:
     json.dump(records, f, indent=4)
 
