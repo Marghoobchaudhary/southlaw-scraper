@@ -1,1 +1,242 @@
-[]
+[
+    {
+        "county": null,
+        "raw_text": "5980 E Mexico Gravel Rd Columbia 65202 8/29/2025 9:00AM N/A N/A Columbia 253139"
+    },
+    {
+        "county": null,
+        "raw_text": "1809 Gooding Ave Saint Joseph 64504 8/22/2025 11:00AM N/A N/A St. Joseph 235917"
+    },
+    {
+        "county": null,
+        "raw_text": "701 McDonald St Saint Joseph 64505 8/29/2025 12:30PM N/A N/A St. Joseph 248572"
+    },
+    {
+        "county": null,
+        "raw_text": "1315 Highway 142 Poplar Bluff 63901 8/13/2025 1:00PM N/A $107,900.00 Poplar Bluff 251488"
+    },
+    {
+        "county": null,
+        "raw_text": "11959 Oak Ridge Lane Holts Summit 65043 8/15/2025 12:30PM N/A $56,074.72 Fulton 252715"
+    },
+    {
+        "county": null,
+        "raw_text": "1700 Russell Rd Pleasant Hill 64080 8/25/2025 9:00AM N/A N/A Harrisonville 243587"
+    },
+    {
+        "county": null,
+        "raw_text": "1205 Hampton Dr Raymore 64083 8/25/2025 9:00AM N/A N/A Harrisonville 251927"
+    },
+    {
+        "county": null,
+        "raw_text": "8738 Partridge Avenue Saint Louis 63147 8/14/2025 1:00PM N/A $129,800.00 St. Louis 248121"
+    },
+    {
+        "county": null,
+        "raw_text": "611 Zay Drive Excelsior Springs 64024 8/21/2025 12:00PM N/A N/A Liberty 97505"
+    },
+    {
+        "county": null,
+        "raw_text": "7 Carver Place Smithville 64089 8/21/2025 12:00PM N/A N/A Liberty 208811"
+    },
+    {
+        "county": null,
+        "raw_text": "200 NE 83rd St Kansas City 64118 8/28/2025 12:00PM N/A N/A Liberty 252318"
+    },
+    {
+        "county": null,
+        "raw_text": "2421 NE Vivion Rd Kansas City 64118 8/28/2025 12:00PM N/A N/A Liberty 242645"
+    },
+    {
+        "county": null,
+        "raw_text": "1509 Northeast 99th Street Kansas City 64155 8/28/2025 12:00PM N/A N/A Liberty 245509"
+    },
+    {
+        "county": null,
+        "raw_text": "419 Nw 40th St N Kansas City 64116 9/4/2025 12:00PM N/A N/A Liberty 252004"
+    },
+    {
+        "county": null,
+        "raw_text": "Information Reported as of: 8/9/2025 12:00:05 PM 13160 Foster, Ste. 100, Overland Park, Kansas 66213 (913)663-7600 1"
+    },
+    {
+        "county": null,
+        "raw_text": "713 Pecan St Hornersville 63855 8/12/2025 11:00AM N/A $68,400.00 Kennett 251011"
+    },
+    {
+        "county": null,
+        "raw_text": "510 W Franklin Ave Owensville 65066 6/24/2025 10:30AM 9/2/2025 10:30 AM N/A Hermann 251740"
+    },
+    {
+        "county": null,
+        "raw_text": "3664 N State Hwy AB Springfield 65803 8/6/2025 11:00AM 8/13/2025 11:00 AM N/A Springfield 252727"
+    },
+    {
+        "county": null,
+        "raw_text": "4225 N State Highway AB Springfield 65803 8/20/2025 11:00AM N/A N/A Springfield 249621"
+    },
+    {
+        "county": null,
+        "raw_text": "2516 Askew Avenue Kansas City 64127 7/24/2025 1:00PM 9/11/2025 1:00 PM N/A Independence 252532"
+    },
+    {
+        "county": null,
+        "raw_text": "12102 E 47th Ter S Independence 64055 7/31/2025 1:00PM 9/4/2025 1:00 PM N/A Independence 252939"
+    },
+    {
+        "county": null,
+        "raw_text": "3615 College Ave Kansas City 64128 8/14/2025 2:00PM N/A $130,257.81 Kansas City 253109"
+    },
+    {
+        "county": null,
+        "raw_text": "7204 Willow Ave Raytown 64133 8/14/2025 1:00PM N/A $106,085.71 Independence 211732"
+    },
+    {
+        "county": null,
+        "raw_text": "3923 College Ave Kansas City 64130 8/21/2025 2:00PM N/A N/A Kansas City 252598"
+    },
+    {
+        "county": null,
+        "raw_text": "3428 S Benton Avenue Kansas City 64128 8/21/2025 2:00PM N/A N/A Kansas City 253218"
+    },
+    {
+        "county": null,
+        "raw_text": "19312 E 8th Street Ct N Independence 64056 8/21/2025 1:00PM N/A N/A Independence 252600"
+    },
+    {
+        "county": null,
+        "raw_text": "15316 Hamilton Rd Greenwood 64034 8/21/2025 1:00PM N/A N/A Independence 252899"
+    },
+    {
+        "county": null,
+        "raw_text": "3035 Englewood Terrace Independence 64052 8/21/2025 1:00PM N/A N/A Independence 249684"
+    },
+    {
+        "county": null,
+        "raw_text": "308 So Cypress Ave Kansas City 64124 8/21/2025 2:00PM N/A N/A Kansas City 252465"
+    },
+    {
+        "county": null,
+        "raw_text": "19608 E 30th St S Independence 64057 8/21/2025 1:00PM N/A N/A Independence 247616"
+    },
+    {
+        "county": null,
+        "raw_text": "8700 E 74th St Kansas City 64133 8/28/2025 2:00PM N/A N/A Kansas City 251883"
+    },
+    {
+        "county": null,
+        "raw_text": "417 N Crysler Ave Independence 64050 8/28/2025 1:00PM N/A N/A Independence 253005"
+    },
+    {
+        "county": null,
+        "raw_text": "2320 SW 10th St Lees Summit 64081 8/28/2025 1:00PM N/A N/A Independence 252708"
+    },
+    {
+        "county": null,
+        "raw_text": "436 SE Ashton Drive Lee's Summit 64063 8/28/2025 1:00PM N/A N/A Independence 253494"
+    },
+    {
+        "county": null,
+        "raw_text": "4737 S Union Avenue Independence 64055 8/28/2025 1:00PM N/A N/A Independence 248162"
+    },
+    {
+        "county": null,
+        "raw_text": "Information Reported as of: 8/9/2025 12:00:05 PM 13160 Foster, Ste. 100, Overland Park, Kansas 66213 (913)663-7600 2"
+    },
+    {
+        "county": null,
+        "raw_text": "628 S Porter Ave Joplin 64801 8/27/2025 9:00AM N/A N/A Carthage 252596"
+    },
+    {
+        "county": null,
+        "raw_text": "5288 Summer Circle Drive Imperial 63052 8/14/2025 3:30PM N/A $46,095.14 Hillsboro 251880"
+    },
+    {
+        "county": null,
+        "raw_text": "14165 State Road TT Festus 63028 8/14/2025 3:30PM N/A $34,970.03 Hillsboro 247799"
+    },
+    {
+        "county": null,
+        "raw_text": "6618 Valley Dr Cedar Hill 63016 8/21/2025 3:30PM N/A N/A Hillsboro 247371"
+    },
+    {
+        "county": null,
+        "raw_text": "712 Tanglewood Acres Festus 63028 8/28/2025 3:30PM N/A N/A Hillsboro 246375"
+    },
+    {
+        "county": null,
+        "raw_text": "11249 Castle Ranch Rd De Soto 63020 8/28/2025 3:30PM N/A N/A Hillsboro 251220"
+    },
+    {
+        "county": null,
+        "raw_text": "33910 300th Street Taylor 63471 8/26/2025 10:30AM N/A N/A Monticello 252799"
+    },
+    {
+        "county": null,
+        "raw_text": "1405 E Cypress St Charleston 63834 8/11/2025 10:00AM N/A $90,700.00 Charleston 251963"
+    },
+    {
+        "county": null,
+        "raw_text": "7714 Jasmine Dr Neosho 64850 8/18/2025 10:00AM N/A N/A Neosho 249933"
+    },
+    {
+        "county": null,
+        "raw_text": "100 E Clay St Smithton 65350 9/3/2025 9:00AM N/A N/A Sedalia 253202"
+    },
+    {
+        "county": null,
+        "raw_text": "3512 Hickory Dr Louisiana 63353 7/22/2025 2:30PM 8/26/2025 2:30 PM $69,547.04 Bowling Green 251385"
+    },
+    {
+        "county": null,
+        "raw_text": "406 Wilson Boulevard Richmond 64085 8/15/2025 9:00AM N/A $92,455.00 Richmond 252641"
+    },
+    {
+        "county": null,
+        "raw_text": "Information Reported as of: 8/9/2025 12:00:05 PM 13160 Foster, Ste. 100, Overland Park, Kansas 66213 (913)663-7600 3"
+    },
+    {
+        "county": null,
+        "raw_text": "904 N Lafayette St Doniphan 63935 9/2/2025 1:00PM N/A N/A Doniphan 251334"
+    },
+    {
+        "county": null,
+        "raw_text": "508 South Vandervoot Desloge 63601 8/12/2025 2:30PM N/A N/A Farmington 252693"
+    },
+    {
+        "county": null,
+        "raw_text": "8431 Bridle Spur Dr Hazelwood 63042 8/14/2025 2:00PM N/A $73,900.00 Clayton 252059"
+    },
+    {
+        "county": null,
+        "raw_text": "1534 Comet Drive Bellefontaine 63137 8/14/2025 2:00PM N/A N/A Clayton 247854"
+    },
+    {
+        "county": null,
+        "raw_text": "9157 Loganberry Ln St Louis 63121 8/14/2025 2:00PM N/A $33,284.93 Clayton 251438"
+    },
+    {
+        "county": null,
+        "raw_text": "225 S Saint Charles St Florissant 63031 8/28/2025 2:00PM N/A N/A Clayton 253006"
+    },
+    {
+        "county": null,
+        "raw_text": "71 Tiny Pine Ln. Galena 65656-4504 8/13/2025 12:00PM N/A $76,063.32 Galena 252070"
+    },
+    {
+        "county": null,
+        "raw_text": "855 Camelot Cedarcreek 65627 8/11/2025 10:30AM N/A $97,124.06 Forsyth 250312"
+    },
+    {
+        "county": null,
+        "raw_text": "3079 Bluebird Rd Merriam Woods 65740 9/3/2025 1:00PM N/A N/A Forsyth 253355"
+    },
+    {
+        "county": null,
+        "raw_text": "9086 13th Rd Mountain Grove 65711 8/27/2025 1:00PM N/A N/A Hartville 253140"
+    },
+    {
+        "county": null,
+        "raw_text": "Information Reported as of: 8/9/2025 12:00:05 PM 13160 Foster, Ste. 100, Overland Park, Kansas 66213 (913)663-7600 4"
+    }
+]
