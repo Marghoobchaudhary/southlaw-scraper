@@ -3,13 +3,22 @@ import pdfplumber
 import json
 from io import BytesIO
 import re
+from datetime import datetime
 
-# Validation regex
-date_re = re.compile(r"^\d{1,2}/\d{1,2}/\d{4}$")
+# More flexible patterns
+date_re = re.compile(r"^\d{1,2}/\d{1,2}/\d{2,4}$")
 zip_re = re.compile(r"^\d{5}$")
-price_re = re.compile(r"^\$?\d[\d,]*\.?\d*$")
+price_re = re.compile(r"^\$?\d[\d,]*$|^N/A$")
 case_no_re = re.compile(r"^\d+$")
 file_no_re = re.compile(r"^\d+$")
+time_re = re.compile(r"^\d{1,2}:\d{2}\s?(AM|PM)$", re.IGNORECASE)
+
+def normalize_date(val):
+    try:
+        d = datetime.strptime(val, "%m/%d/%y") if len(val.split("/")[-1]) == 2 else datetime.strptime(val, "%m/%d/%Y")
+        return d.strftime("%m/%d/%Y")
+    except:
+        return val
 
 url = "https://www.southlaw.com/report/Sales_Report_MO.pdf"
 response = requests.get(url)
@@ -34,32 +43,31 @@ with pdfplumber.open(pdf_file) as pdf:
                 continue
 
             parts = line.strip().split()
-            if len(parts) < 10:
+            if len(parts) < 8:
                 continue
 
-            # Parse from right with validation
             idx = len(parts) - 1
             firm_file = parts[idx] if file_no_re.match(parts[idx]) else None
             idx -= 1
             civil_case = parts[idx] if case_no_re.match(parts[idx]) else None
             idx -= 1
-            sale_city = parts[idx]  # May not validate, cities can be words
+            sale_city = parts[idx]
             idx -= 1
-            opening_bid = parts[idx] if price_re.match(parts[idx]) or parts[idx] == "N/A" else None
+            opening_bid = parts[idx] if price_re.match(parts[idx]) else None
             idx -= 1
-            continued_date_time = parts[idx] if date_re.match(parts[idx]) or parts[idx] == "N/A" else None
+            continued_date_time = normalize_date(parts[idx]) if date_re.match(parts[idx]) or parts[idx] == "N/A" else None
             idx -= 1
-            sale_time = parts[idx] if re.match(r"^\d{1,2}:\d{2}[AP]M$", parts[idx]) else None
+            sale_time = parts[idx] if time_re.match(parts[idx]) else None
             idx -= 1
-            sale_date = parts[idx] if date_re.match(parts[idx]) else None
+            sale_date = normalize_date(parts[idx]) if date_re.match(parts[idx]) else None
             idx -= 1
             property_zip = parts[idx] if zip_re.match(parts[idx]) else None
             idx -= 1
             property_city = parts[idx]
             address = " ".join(parts[0:idx])
 
-            # Ensure all critical fields are valid before saving
-            if not (current_county and sale_date and property_zip and property_city and firm_file):
+            # Fix minimal requirements
+            if not (current_county and sale_date and property_zip and firm_file):
                 continue
 
             records.append({
@@ -79,5 +87,4 @@ with pdfplumber.open(pdf_file) as pdf:
 with open("sales_report.json", "w", encoding="utf-8") as f:
     json.dump(records, f, indent=4)
 
-print(f"Extracted {len(records)} validated records.")
-
+print(f"Extracted {len(records)} validated rows.")
