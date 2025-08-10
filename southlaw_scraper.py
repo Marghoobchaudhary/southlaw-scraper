@@ -3,22 +3,6 @@ import pdfplumber
 import json
 from io import BytesIO
 import re
-from datetime import datetime
-
-# More flexible patterns
-date_re = re.compile(r"^\d{1,2}/\d{1,2}/\d{2,4}$")
-zip_re = re.compile(r"^\d{5}$")
-price_re = re.compile(r"^\$?\d[\d,]*$|^N/A$")
-case_no_re = re.compile(r"^\d+$")
-file_no_re = re.compile(r"^\d+$")
-time_re = re.compile(r"^\d{1,2}:\d{2}\s?(AM|PM)$", re.IGNORECASE)
-
-def normalize_date(val):
-    try:
-        d = datetime.strptime(val, "%m/%d/%y") if len(val.split("/")[-1]) == 2 else datetime.strptime(val, "%m/%d/%Y")
-        return d.strftime("%m/%d/%Y")
-    except:
-        return val
 
 url = "https://www.southlaw.com/report/Sales_Report_MO.pdf"
 response = requests.get(url)
@@ -34,57 +18,48 @@ with pdfplumber.open(pdf_file) as pdf:
             continue
 
         for line in text.split("\n"):
-            # Detect county headings
+            # Detect county headings (allow periods)
             if re.match(r"^[A-Z\s.]+$", line.strip()) and len(line.strip()) > 3:
                 current_county = line.strip().title()
+                print(f"Detected county: {current_county}")
                 continue
 
+            # Skip header rows
             if "Property Address" in line:
                 continue
 
+            # Split row by spaces
             parts = line.strip().split()
-            if len(parts) < 8:
+            if len(parts) < 10:
                 continue
 
-            idx = len(parts) - 1
-            firm_file = parts[idx] if file_no_re.match(parts[idx]) else None
-            idx -= 1
-            civil_case = parts[idx] if case_no_re.match(parts[idx]) else None
-            idx -= 1
-            sale_city = parts[idx]
-            idx -= 1
-            opening_bid = parts[idx] if price_re.match(parts[idx]) else None
-            idx -= 1
-            continued_date_time = normalize_date(parts[idx]) if date_re.match(parts[idx]) or parts[idx] == "N/A" else None
-            idx -= 1
-            sale_time = parts[idx] if time_re.match(parts[idx]) else None
-            idx -= 1
-            sale_date = normalize_date(parts[idx]) if date_re.match(parts[idx]) else None
-            idx -= 1
-            property_zip = parts[idx] if zip_re.match(parts[idx]) else None
-            idx -= 1
-            property_city = parts[idx]
-            address = " ".join(parts[0:idx])
-
-            # Fix minimal requirements
-            if not (current_county and sale_date and property_zip and firm_file):
-                continue
+            firm_file = parts[-1]
+            civil_case = parts[-2]
+            sale_city = parts[-3]
+            bid = parts[-4]
+            continued = parts[-5]
+            sale_time = parts[-6]
+            sale_date = parts[-7]
+            zip_code = parts[-8]
+            city = parts[-9]
+            address = " ".join(parts[0:-9])
 
             records.append({
                 "county": current_county,
                 "property_address": address,
-                "property_city": property_city,
-                "property_zip": property_zip,
+                "property_city": city,
+                "property_zip": zip_code,
                 "sale_date": sale_date,
                 "sale_time": sale_time,
-                "continued_date_time": continued_date_time,
-                "opening_bid": opening_bid,
+                "continued_date_time": continued,
+                "opening_bid": bid,
                 "sale_location_city": sale_city,
                 "civil_case_no": civil_case,
                 "firm_file": firm_file
             })
 
+# Save to JSON
 with open("sales_report.json", "w", encoding="utf-8") as f:
     json.dump(records, f, indent=4)
 
-print(f"Extracted {len(records)} validated rows.")
+print(f"Extracted {len(records)} records.")
