@@ -1,6 +1,6 @@
 [
     {
-        "county": "Boone",
+        "county": null,
         "property_address": "5980 E Mexico Gravel",
         "property_city": "Rd",
         "property_zip": "Columbia",
@@ -13,7 +13,7 @@
         "firm_file": "253139"
     },
     {
-        "county": "Buchanan",
+        "county": null,
         "property_address": "1809 Gooding Ave Saint",
         "property_city": "Joseph",
         "property_zip": "64504",
@@ -26,7 +26,7 @@
         "firm_file": "235917"
     },
     {
-        "county": "Butler",
+        "county": null,
         "property_address": "1315 Highway 142 Poplar",
         "property_city": "Bluff",
         "property_zip": "63901",
@@ -39,7 +39,7 @@
         "firm_file": "251488"
     },
     {
-        "county": "Callaway",
+        "county": null,
         "property_address": "11959 Oak Ridge Lane",
         "property_city": "Holts",
         "property_zip": "Summit",
@@ -52,7 +52,7 @@
         "firm_file": "252715"
     },
     {
-        "county": "Cass",
+        "county": null,
         "property_address": "1205 Hampton",
         "property_city": "Dr",
         "property_zip": "Raymore",
@@ -65,7 +65,7 @@
         "firm_file": "251927"
     },
     {
-        "county": "Cass",
+        "county": null,
         "property_address": "1700 Russell Rd",
         "property_city": "Pleasant",
         "property_zip": "Hill",
@@ -91,7 +91,7 @@
         "firm_file": "248121"
     },
     {
-        "county": "Clay",
+        "county": null,
         "property_address": "611 Zay Drive",
         "property_city": "Excelsior",
         "property_zip": "Springs",
@@ -104,7 +104,7 @@
         "firm_file": "97505"
     },
     {
-        "county": "Clay",
+        "county": null,
         "property_address": "7 Carver",
         "property_city": "Place",
         "property_zip": "Smithville",
@@ -117,7 +117,7 @@
         "firm_file": "208811"
     },
     {
-        "county": "Clay",
+        "county": null,
         "property_address": "200 NE 83rd St",
         "property_city": "Kansas",
         "property_zip": "City",
@@ -130,7 +130,7 @@
         "firm_file": "252318"
     },
     {
-        "county": "Clay",
+        "county": null,
         "property_address": "2421 NE Vivion Rd",
         "property_city": "Kansas",
         "property_zip": "City",
@@ -143,7 +143,7 @@
         "firm_file": "242645"
     },
     {
-        "county": "Clay",
+        "county": null,
         "property_address": "1509 Northeast 99th Street",
         "property_city": "Kansas",
         "property_zip": "City",
@@ -156,7 +156,7 @@
         "firm_file": "245509"
     },
     {
-        "county": "Dunklin",
+        "county": null,
         "property_address": "713 Pecan",
         "property_city": "St",
         "property_zip": "Hornersville",
@@ -169,8 +169,8 @@
         "firm_file": "251011"
     },
     {
-        "county": "Dunklin",
-        "property_address": "Information Reported as of: 8/11/2025 2:00:05 PM 13160",
+        "county": null,
+        "property_address": "Information Reported as of: 8/11/2025 2:15:29 PM 13160",
         "property_city": "Foster,",
         "property_zip": "Ste.",
         "sale_date": "100,",
@@ -182,7 +182,7 @@
         "firm_file": "1"
     },
     {
-        "county": "Gasconade",
+        "county": null,
         "property_address": "510 W Franklin Ave Owensville",
         "property_city": "65066",
         "property_zip": "6/24/2025",
@@ -195,7 +195,7 @@
         "firm_file": "251740"
     },
     {
-        "county": "Greene",
+        "county": null,
         "property_address": "3664 N State Hwy AB Springfield",
         "property_city": "65803",
         "property_zip": "8/6/2025",
@@ -208,7 +208,7 @@
         "firm_file": "252727"
     },
     {
-        "county": "Jackson",
+        "county": null,
         "property_address": "2516 Askew Avenue Kansas City",
         "property_city": "64127",
         "property_zip": "7/24/2025",
@@ -221,7 +221,7 @@
         "firm_file": "252532"
     },
     {
-        "county": "Jackson",
+        "county": null,
         "property_address": "12102 E 47th Ter S Independence",
         "property_city": "64055",
         "property_zip": "7/31/2025",
@@ -234,7 +234,7 @@
         "firm_file": "252939"
     },
     {
-        "county": "Jackson",
+        "county": null,
         "property_address": "7204 Willow",
         "property_city": "Ave",
         "property_zip": "Raytown",
@@ -247,7 +247,7 @@
         "firm_file": "211732"
     },
     {
-        "county": "Jackson",
+        "county": null,
         "property_address": "3615 College Ave Kansas",
         "property_city": "City",
         "property_zip": "64128",
@@ -260,7 +260,7 @@
         "firm_file": "253109"
     },
     {
-        "county": "Jackson",
+        "county": null,
         "property_address": "15316 Hamilton",
         "property_city": "Rd",
         "property_zip": "Greenwood",
@@ -273,7 +273,7 @@
         "firm_file": "252899"
     },
     {
-        "county": "Jackson",
+        "county": null,
         "property_address": "3035 Englewood",
         "property_city": "Terrace",
         "property_zip": "Independence",
@@ -286,7 +286,7 @@
         "firm_file": "249684"
     },
     {
-        "county": "Jackson",
+        "county": null,
         "property_address": "3923 College Ave Kansas",
         "property_city": "City",
         "property_zip": "64130",
@@ -299,7 +299,7 @@
         "firm_file": "252598"
     },
     {
-        "county": "Jackson",
+        "county": null,
         "property_address": "308 So Cypress Ave Kansas",
         "property_city": "City",
         "property_zip": "64124",
@@ -312,7 +312,7 @@
         "firm_file": "252465"
     },
     {
-        "county": "Jackson",
+        "county": null,
         "property_address": "3428 S Benton Avenue Kansas",
         "property_city": "City",
         "property_zip": "64128",
@@ -325,7 +325,7 @@
         "firm_file": "253218"
     },
     {
-        "county": "Jackson",
+        "county": null,
         "property_address": "19608 E 30th St",
         "property_city": "S",
         "property_zip": "Independence",
@@ -338,7 +338,7 @@
         "firm_file": "247616"
     },
     {
-        "county": "Jackson",
+        "county": null,
         "property_address": "19312 E 8th Street Ct",
         "property_city": "N",
         "property_zip": "Independence",
@@ -351,7 +351,7 @@
         "firm_file": "252600"
     },
     {
-        "county": "Jackson",
+        "county": null,
         "property_address": "8700 E 74th St Kansas",
         "property_city": "City",
         "property_zip": "64133",
@@ -364,7 +364,7 @@
         "firm_file": "251883"
     },
     {
-        "county": "Jackson",
+        "county": null,
         "property_address": "436 SE Ashton Drive",
         "property_city": "Lee's",
         "property_zip": "Summit",
@@ -377,7 +377,7 @@
         "firm_file": "253494"
     },
     {
-        "county": "Jackson",
+        "county": null,
         "property_address": "4737 S Union",
         "property_city": "Avenue",
         "property_zip": "Independence",
@@ -390,7 +390,7 @@
         "firm_file": "248162"
     },
     {
-        "county": "Jackson",
+        "county": null,
         "property_address": "417 N Crysler",
         "property_city": "Ave",
         "property_zip": "Independence",
@@ -403,7 +403,7 @@
         "firm_file": "253005"
     },
     {
-        "county": "Jackson",
+        "county": null,
         "property_address": "2320 SW 10th St",
         "property_city": "Lees",
         "property_zip": "Summit",
@@ -416,7 +416,7 @@
         "firm_file": "252708"
     },
     {
-        "county": "Jasper",
+        "county": null,
         "property_address": "628 S Porter",
         "property_city": "Ave",
         "property_zip": "Joplin",
@@ -429,8 +429,8 @@
         "firm_file": "252596"
     },
     {
-        "county": "Jasper",
-        "property_address": "Information Reported as of: 8/11/2025 2:00:05 PM 13160",
+        "county": null,
+        "property_address": "Information Reported as of: 8/11/2025 2:15:29 PM 13160",
         "property_city": "Foster,",
         "property_zip": "Ste.",
         "sale_date": "100,",
@@ -442,7 +442,7 @@
         "firm_file": "2"
     },
     {
-        "county": "Jefferson",
+        "county": null,
         "property_address": "5288 Summer Circle",
         "property_city": "Drive",
         "property_zip": "Imperial",
@@ -455,7 +455,7 @@
         "firm_file": "251880"
     },
     {
-        "county": "Jefferson",
+        "county": null,
         "property_address": "14165 State Road",
         "property_city": "TT",
         "property_zip": "Festus",
@@ -468,7 +468,7 @@
         "firm_file": "247799"
     },
     {
-        "county": "Jefferson",
+        "county": null,
         "property_address": "6618 Valley Dr",
         "property_city": "Cedar",
         "property_zip": "Hill",
@@ -481,7 +481,7 @@
         "firm_file": "247371"
     },
     {
-        "county": "Jefferson",
+        "county": null,
         "property_address": "712 Tanglewood",
         "property_city": "Acres",
         "property_zip": "Festus",
@@ -494,7 +494,7 @@
         "firm_file": "246375"
     },
     {
-        "county": "Jefferson",
+        "county": null,
         "property_address": "11249 Castle Ranch Rd",
         "property_city": "De",
         "property_zip": "Soto",
@@ -507,7 +507,7 @@
         "firm_file": "251220"
     },
     {
-        "county": "Lewis",
+        "county": null,
         "property_address": "33910 300th",
         "property_city": "Street",
         "property_zip": "Taylor",
@@ -520,7 +520,7 @@
         "firm_file": "252799"
     },
     {
-        "county": "Mississippi",
+        "county": null,
         "property_address": "1405 E Cypress",
         "property_city": "St",
         "property_zip": "Charleston",
@@ -533,7 +533,7 @@
         "firm_file": "251963"
     },
     {
-        "county": "Newton",
+        "county": null,
         "property_address": "7714 Jasmine",
         "property_city": "Dr",
         "property_zip": "Neosho",
@@ -546,7 +546,7 @@
         "firm_file": "249933"
     },
     {
-        "county": "Pettis",
+        "county": null,
         "property_address": "100 E Clay",
         "property_city": "St",
         "property_zip": "Smithton",
@@ -559,7 +559,7 @@
         "firm_file": "253202"
     },
     {
-        "county": "Pike",
+        "county": null,
         "property_address": "3512 Hickory Dr Louisiana 63353",
         "property_city": "7/22/2025",
         "property_zip": "2:30PM",
@@ -572,7 +572,7 @@
         "firm_file": "251385"
     },
     {
-        "county": "Ray",
+        "county": null,
         "property_address": "406 Wilson",
         "property_city": "Boulevard",
         "property_zip": "Richmond",
@@ -585,7 +585,7 @@
         "firm_file": "252641"
     },
     {
-        "county": "Ripley",
+        "county": null,
         "property_address": "904 N Lafayette",
         "property_city": "St",
         "property_zip": "Doniphan",
@@ -598,8 +598,8 @@
         "firm_file": "251334"
     },
     {
-        "county": "Ripley",
-        "property_address": "Information Reported as of: 8/11/2025 2:00:05 PM 13160",
+        "county": null,
+        "property_address": "Information Reported as of: 8/11/2025 2:15:29 PM 13160",
         "property_city": "Foster,",
         "property_zip": "Ste.",
         "sale_date": "100,",
@@ -611,7 +611,7 @@
         "firm_file": "3"
     },
     {
-        "county": "St. Francois",
+        "county": null,
         "property_address": "508 South",
         "property_city": "Vandervoot",
         "property_zip": "Desloge",
@@ -624,7 +624,7 @@
         "firm_file": "252693"
     },
     {
-        "county": "St. Louis",
+        "county": null,
         "property_address": "1534 Comet",
         "property_city": "Drive",
         "property_zip": "Bellefontaine",
@@ -637,7 +637,7 @@
         "firm_file": "247854"
     },
     {
-        "county": "Neighbor",
+        "county": null,
         "property_address": "8431 Bridle Spur",
         "property_city": "Dr",
         "property_zip": "Hazelwood",
@@ -650,7 +650,7 @@
         "firm_file": "252059"
     },
     {
-        "county": "Neighbor",
+        "county": null,
         "property_address": "225 S Saint Charles",
         "property_city": "St",
         "property_zip": "Florissant",
@@ -663,7 +663,7 @@
         "firm_file": "253006"
     },
     {
-        "county": "Stone",
+        "county": null,
         "property_address": "71 Tiny Pine",
         "property_city": "Ln.",
         "property_zip": "Galena",
@@ -676,7 +676,7 @@
         "firm_file": "252070"
     },
     {
-        "county": "Taney",
+        "county": null,
         "property_address": "855",
         "property_city": "Camelot",
         "property_zip": "Cedarcreek",
@@ -689,7 +689,7 @@
         "firm_file": "250312"
     },
     {
-        "county": "Taney",
+        "county": null,
         "property_address": "3079 Bluebird Rd",
         "property_city": "Merriam",
         "property_zip": "Woods",
@@ -702,7 +702,7 @@
         "firm_file": "253355"
     },
     {
-        "county": "Village Wright",
+        "county": null,
         "property_address": "9086 13th Rd",
         "property_city": "Mountain",
         "property_zip": "Grove",
@@ -715,8 +715,8 @@
         "firm_file": "253140"
     },
     {
-        "county": "Village Wright",
-        "property_address": "Information Reported as of: 8/11/2025 2:00:05 PM 13160",
+        "county": null,
+        "property_address": "Information Reported as of: 8/11/2025 2:15:29 PM 13160",
         "property_city": "Foster,",
         "property_zip": "Ste.",
         "sale_date": "100,",
