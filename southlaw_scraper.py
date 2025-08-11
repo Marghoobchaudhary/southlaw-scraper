@@ -22,6 +22,7 @@ county_pattern = re.compile(r"^(City of\s+)?[A-Za-z.\-'\s]+$")
 ignore_headings = [
     "information reported as of",
     "sale date",
+    "St Louis",
     "property address"
 ]
 
