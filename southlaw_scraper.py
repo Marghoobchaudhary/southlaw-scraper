@@ -12,20 +12,22 @@ records = []
 current_county = None
 
 def is_county_heading(line):
-    # Clean up extra spaces
-    cleaned = re.sub(r"\s+", " ", line.strip())
-    if not cleaned:
+    line = line.strip()
+    if not line:
         return False
-    # No numbers, $ signs, or slashes in county names
-    if re.search(r"[\d/$]", cleaned):
+    # Remove any special characters like green line artifacts
+    cleaned = re.sub(r"[^A-Za-z.\-\s]", "", line).strip()
+    # Must not contain numbers or $
+    if re.search(r"[\d$]", cleaned):
         return False
-    # County headings are usually short (under 40 chars)
+    # Should be mostly uppercase
+    upper_ratio = sum(1 for c in cleaned if c.isupper()) / max(len(cleaned), 1)
+    if upper_ratio < 0.6:  # at least 60% uppercase
+        return False
+    # Usually short
     if len(cleaned) > 40:
         return False
-    # All uppercase with optional dots, hyphens, and spaces
-    if re.match(r"^[A-Z .\-]+$", cleaned):
-        return True
-    return False
+    return True
 
 with pdfplumber.open(pdf_file) as pdf:
     for page in pdf.pages:
@@ -33,19 +35,21 @@ with pdfplumber.open(pdf_file) as pdf:
         if not text:
             continue
 
-        for line in text.split("\n"):
+        for raw_line in text.split("\n"):
+            line = raw_line.strip()
+
             # Detect county headings
             if is_county_heading(line):
-                current_county = re.sub(r"\s+", " ", line.strip())  # preserve original casing from PDF
+                current_county = re.sub(r"\s+", " ", line).strip()
                 print(f"Detected county: {current_county}")
                 continue
 
-            # Skip header rows
+            # Skip headers
             if "Property Address" in line:
                 continue
 
-            # Split row by spaces
-            parts = line.strip().split()
+            # Parse property rows
+            parts = line.split()
             if len(parts) < 10:
                 continue
 
@@ -58,7 +62,7 @@ with pdfplumber.open(pdf_file) as pdf:
             sale_date = parts[-7]
             zip_code = parts[-8]
             city = parts[-9]
-            address = " ".join(parts[0:-9])
+            address = " ".join(parts[:-9])
 
             records.append({
                 "county": current_county if current_county else "Unknown",
@@ -74,7 +78,7 @@ with pdfplumber.open(pdf_file) as pdf:
                 "firm_file": firm_file
             })
 
-# Save to JSON
+# Save JSON
 with open("sales_report.json", "w", encoding="utf-8") as f:
     json.dump(records, f, indent=4)
 
