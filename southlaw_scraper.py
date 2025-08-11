@@ -12,18 +12,19 @@ pdf_file = BytesIO(response.content)
 records = []
 current_county = None
 
-# Loosened county detection:
-# - Optional "City of "
-# - Allows letters, spaces, periods, apostrophes, and hyphens
-# - No digits allowed
+# Loosened county detection
 county_pattern = re.compile(r"^(City of\s+)?[A-Za-z.\-'\s]+$")
 
-# Words to skip when scanning headings
+# Words/phrases to skip when scanning headings
 ignore_headings = [
     "information reported as of",
     "sale date",
-    "St Louis",
     "property address"
+]
+
+# Words/phrases we NEVER skip even if they match patterns
+never_skip = [
+    "st louis"  # lowercase match check
 ]
 
 with pdfplumber.open(pdf_file) as pdf:
@@ -35,19 +36,23 @@ with pdfplumber.open(pdf_file) as pdf:
         for line in text.split("\n"):
             line_clean = line.strip()
 
-            # Skip obvious junk lines
-            if any(kw in line_clean.lower() for kw in ignore_headings):
-                continue
+            # If this line contains any "never skip" term, bypass all skip logic
+            if any(term in line_clean.lower() for term in never_skip):
+                pass
+            else:
+                # Skip obvious junk lines
+                if any(kw in line_clean.lower() for kw in ignore_headings):
+                    continue
 
-            # Detect county heading (must not contain digits)
-            if county_pattern.match(line_clean) and not re.search(r"\d", line_clean):
-                current_county = line_clean.strip()
-                print(f"Detected county: {current_county}")
-                continue
+                # Detect county heading (must not contain digits)
+                if county_pattern.match(line_clean) and not re.search(r"\d", line_clean):
+                    current_county = line_clean.strip()
+                    print(f"Detected county: {current_county}")
+                    continue
 
-            # Skip header rows in property table
-            if "Property Address" in line_clean:
-                continue
+                # Skip header rows in property table
+                if "Property Address" in line_clean:
+                    continue
 
             # Split row into parts
             parts = line_clean.split()
