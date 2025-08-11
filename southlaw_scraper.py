@@ -4,28 +4,12 @@ import json
 from io import BytesIO
 import re
 
-# PDF URL
 url = "https://www.southlaw.com/report/Sales_Report_MO.pdf"
 response = requests.get(url)
 pdf_file = BytesIO(response.content)
 
 records = []
 current_county = None
-
-# Loosened county detection
-county_pattern = re.compile(r"^(City of\s+)?[A-Za-z.\-'\s]+$")
-
-# Words/phrases to skip when scanning headings
-ignore_headings = [
-    "information reported as of",
-    "sale date",
-    "property address"
-]
-
-# Words/phrases we NEVER skip even if they match patterns
-never_skip = [
-    "st louis"  # lowercase match check
-]
 
 with pdfplumber.open(pdf_file) as pdf:
     for page in pdf.pages:
@@ -34,32 +18,21 @@ with pdfplumber.open(pdf_file) as pdf:
             continue
 
         for line in text.split("\n"):
-            line_clean = line.strip()
+            # Detect county headings (allow periods)
+            if re.match(r"^[A-Z\s.]+$", line.strip()) and len(line.strip()) > 3:
+                current_county = line.strip().title()
+                print(f"Detected county: {current_county}")
+                continue
 
-            # If this line contains any "never skip" term, bypass all skip logic
-            if any(term in line_clean.lower() for term in never_skip):
-                pass
-            else:
-                # Skip obvious junk lines
-                if any(kw in line_clean.lower() for kw in ignore_headings):
-                    continue
+            # Skip header rows
+            if "Property Address" in line:
+                continue
 
-                # Detect county heading (must not contain digits)
-                if county_pattern.match(line_clean) and not re.search(r"\d", line_clean):
-                    current_county = line_clean.strip()
-                    print(f"Detected county: {current_county}")
-                    continue
-
-                # Skip header rows in property table
-                if "Property Address" in line_clean:
-                    continue
-
-            # Split row into parts
-            parts = line_clean.split()
+            # Split row by spaces
+            parts = line.strip().split()
             if len(parts) < 10:
                 continue
 
-            # Extract columns based on position
             firm_file = parts[-1]
             civil_case = parts[-2]
             sale_city = parts[-3]
@@ -69,10 +42,10 @@ with pdfplumber.open(pdf_file) as pdf:
             sale_date = parts[-7]
             zip_code = parts[-8]
             city = parts[-9]
-            address = " ".join(parts[:-9])
+            address = " ".join(parts[0:-9])
 
             records.append({
-                "county": current_county if current_county else "N/A",
+                "county": current_county,
                 "property_address": address,
                 "property_city": city,
                 "property_zip": zip_code,
@@ -85,7 +58,7 @@ with pdfplumber.open(pdf_file) as pdf:
                 "firm_file": firm_file
             })
 
-# Save extracted records to JSON
+# Save to JSON
 with open("sales_report.json", "w", encoding="utf-8") as f:
     json.dump(records, f, indent=4)
 
