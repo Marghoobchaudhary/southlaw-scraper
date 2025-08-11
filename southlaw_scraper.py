@@ -12,15 +12,18 @@ pdf_file = BytesIO(response.content)
 records = []
 current_county = None
 
-# County detection (loosened)
-county_pattern = re.compile(r"^(City of\s+)?[A-Za-z.\-'\s]+$")
-
-# Ignore heading lines
+county_pattern = re.compile(r"^(City of\s+)?[A-Za-z.\-'\s]+$")  # County names only
 ignore_headings = [
     "information reported as of",
     "sale date",
     "property address"
 ]
+
+def looks_like_property(line):
+    """Check if a line contains a ZIP and a date → likely a property row"""
+    has_zip = bool(re.search(r"\b\d{5}\b", line))
+    has_date = bool(re.search(r"\d{1,2}/\d{1,2}/\d{4}", line))
+    return has_zip and has_date
 
 with pdfplumber.open(pdf_file) as pdf:
     for page in pdf.pages:
@@ -28,37 +31,51 @@ with pdfplumber.open(pdf_file) as pdf:
         if not text:
             continue
 
-        for line in text.split("\n"):
-            line_clean = line.strip()
+        lines = [l.strip() for l in text.split("\n") if l.strip()]
+        merged_lines = []
+        buffer = ""
 
+        # Merge multi-line property rows
+        for line in lines:
+            if looks_like_property(line):
+                if buffer:
+                    merged_lines.append(buffer + " " + line)
+                    buffer = ""
+                else:
+                    merged_lines.append(line)
+            else:
+                # Might be part of an address
+                if buffer:
+                    buffer += " " + line
+                else:
+                    buffer = line
+        if buffer:
+            merged_lines.append(buffer)
+
+        for line_clean in merged_lines:
             # Skip obvious junk lines
             if any(kw in line_clean.lower() for kw in ignore_headings):
                 continue
 
-            # Detect county heading
+            # Detect county heading (only if not a property row)
             if county_pattern.match(line_clean) and not re.search(r"\d", line_clean):
-                current_county = line_clean.strip()
-                print(f"Detected county: {current_county}")
-                continue
-
-            # Skip property table headers
-            if "Property Address" in line_clean:
-                continue
+                if not looks_like_property(line_clean):
+                    current_county = line_clean.strip()
+                    print(f"Detected county: {current_county}")
+                    continue
 
             parts = line_clean.split()
 
-            # Find ZIP code position (first 5-digit number)
+            # Find ZIP position
             zip_idx = None
             for i, token in enumerate(parts):
                 if re.fullmatch(r"\d{5}", token):
                     zip_idx = i
                     break
 
-            # If ZIP not found or not enough columns after ZIP → skip
             if zip_idx is None or zip_idx + 7 >= len(parts):
                 continue
 
-            # Extract fields dynamically
             address = " ".join(parts[:zip_idx - 1])
             city = " ".join(parts[zip_idx - 1:zip_idx])
             zip_code = parts[zip_idx]
@@ -84,7 +101,7 @@ with pdfplumber.open(pdf_file) as pdf:
                 "firm_file": firm_file
             })
 
-# Save extracted records to JSON
+# Save to JSON
 with open("sales_report.json", "w", encoding="utf-8") as f:
     json.dump(records, f, indent=4)
 
