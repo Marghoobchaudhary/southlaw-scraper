@@ -12,57 +12,18 @@ pdf_file = BytesIO(response.content)
 records = []
 current_county = None
 
-# ZIP to County mapping for overrides
-stl_zip_to_county = {
-    # St. Louis County
-    "63005": "St. Louis",
-    "63011": "St. Louis",
-    "63017": "St. Louis",
-    "63021": "St. Louis",
-    "63121": "St. Louis",
-    "63122": "St. Louis",
-    "63123": "St. Louis",
-    "63124": "St. Louis",
-    "63125": "St. Louis",
-    "63126": "St. Louis",
-    "63127": "St. Louis",
-    "63128": "St. Louis",
-    "63129": "St. Louis",
-    "63130": "St. Louis",
-    "63131": "St. Louis",
-    "63132": "St. Louis",
-    "63133": "St. Louis",
-    "63134": "St. Louis",
-    "63135": "St. Louis",
-    "63136": "St. Louis",
-    "63137": "St. Louis",
-    "63138": "St. Louis",
-    "63140": "St. Louis",
-    "63141": "St. Louis",
-    "63143": "St. Louis",
-    "63144": "St. Louis",
-    "63146": "St. Louis",
+# Loosened county detection:
+# - Optional "City of "
+# - Allows letters, spaces, periods, apostrophes, and hyphens
+# - No digits allowed
+county_pattern = re.compile(r"^(City of\s+)?[A-Za-z.\-'\s]+$")
 
-    # City of St. Louis
-    "63101": "City of St. Louis",
-    "63102": "City of St. Louis",
-    "63103": "City of St. Louis",
-    "63104": "City of St. Louis",
-    "63106": "City of St. Louis",
-    "63107": "City of St. Louis",
-    "63108": "City of St. Louis",
-    "63109": "City of St. Louis",
-    "63110": "City of St. Louis",
-    "63111": "City of St. Louis",
-    "63112": "City of St. Louis",
-    "63113": "City of St. Louis",
-    "63115": "City of St. Louis",
-    "63116": "City of St. Louis",
-    "63118": "City of St. Louis",
-    "63120": "City of St. Louis",
-    "63139": "City of St. Louis",
-    "63147": "City of St. Louis",
-}
+# Words to skip when scanning headings
+ignore_headings = [
+    "information reported as of",
+    "sale date",
+    "property address"
+]
 
 with pdfplumber.open(pdf_file) as pdf:
     for page in pdf.pages:
@@ -71,20 +32,28 @@ with pdfplumber.open(pdf_file) as pdf:
             continue
 
         for line in text.split("\n"):
-            # Detect county headings (allow periods)
-            if re.match(r"^[A-Z\s.]+$", line.strip()) and len(line.strip()) > 3:
-                current_county = line.strip().title()
+            line_clean = line.strip()
+
+            # Skip obvious junk lines
+            if any(kw in line_clean.lower() for kw in ignore_headings):
                 continue
 
-            # Skip header rows
-            if "Property Address" in line:
+            # Detect county heading (must not contain digits)
+            if county_pattern.match(line_clean) and not re.search(r"\d", line_clean):
+                current_county = line_clean.strip()
+                print(f"Detected county: {current_county}")
                 continue
 
-            # Split row by spaces
-            parts = line.strip().split()
+            # Skip header rows in property table
+            if "Property Address" in line_clean:
+                continue
+
+            # Split row into parts
+            parts = line_clean.split()
             if len(parts) < 10:
                 continue
 
+            # Extract columns based on position
             firm_file = parts[-1]
             civil_case = parts[-2]
             sale_city = parts[-3]
@@ -94,13 +63,10 @@ with pdfplumber.open(pdf_file) as pdf:
             sale_date = parts[-7]
             zip_code = parts[-8]
             city = parts[-9]
-            address = " ".join(parts[0:-9])
-
-            # If ZIP matches St. Louis or City of St. Louis, override county
-            county = stl_zip_to_county.get(zip_code, current_county)
+            address = " ".join(parts[:-9])
 
             records.append({
-                "county": county,
+                "county": current_county if current_county else "N/A",
                 "property_address": address,
                 "property_city": city,
                 "property_zip": zip_code,
@@ -113,7 +79,7 @@ with pdfplumber.open(pdf_file) as pdf:
                 "firm_file": firm_file
             })
 
-# Save to JSON
+# Save extracted records to JSON
 with open("sales_report.json", "w", encoding="utf-8") as f:
     json.dump(records, f, indent=4)
 
