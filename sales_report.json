@@ -78,7 +78,7 @@
         "firm_file": "243587"
     },
     {
-        "county": "Cass",
+        "county": "City of St. Louis",
         "property_address": "8738 Partridge Avenue Saint",
         "property_city": "Louis",
         "property_zip": "63147",
@@ -167,19 +167,6 @@
         "sale_location_city": "$68,400.00",
         "civil_case_no": "Kennett",
         "firm_file": "251011"
-    },
-    {
-        "county": "Dunklin",
-        "property_address": "Information Reported as of: 8/11/2025 12:15:04 PM 13160",
-        "property_city": "Foster,",
-        "property_zip": "Ste.",
-        "sale_date": "100,",
-        "sale_time": "Overland",
-        "continued_date_time": "Park,",
-        "opening_bid": "Kansas",
-        "sale_location_city": "66213",
-        "civil_case_no": "(913)663-7600",
-        "firm_file": "1"
     },
     {
         "county": "Gasconade",
@@ -429,19 +416,6 @@
         "firm_file": "252596"
     },
     {
-        "county": "Jasper",
-        "property_address": "Information Reported as of: 8/11/2025 12:15:04 PM 13160",
-        "property_city": "Foster,",
-        "property_zip": "Ste.",
-        "sale_date": "100,",
-        "sale_time": "Overland",
-        "continued_date_time": "Park,",
-        "opening_bid": "Kansas",
-        "sale_location_city": "66213",
-        "civil_case_no": "(913)663-7600",
-        "firm_file": "2"
-    },
-    {
         "county": "Jefferson",
         "property_address": "5288 Summer Circle",
         "property_city": "Drive",
@@ -598,20 +572,7 @@
         "firm_file": "251334"
     },
     {
-        "county": "Ripley",
-        "property_address": "Information Reported as of: 8/11/2025 12:15:04 PM 13160",
-        "property_city": "Foster,",
-        "property_zip": "Ste.",
-        "sale_date": "100,",
-        "sale_time": "Overland",
-        "continued_date_time": "Park,",
-        "opening_bid": "Kansas",
-        "sale_location_city": "66213",
-        "civil_case_no": "(913)663-7600",
-        "firm_file": "3"
-    },
-    {
-        "county": "Ripley",
+        "county": "St. Francois",
         "property_address": "508 South",
         "property_city": "Vandervoot",
         "property_zip": "Desloge",
@@ -624,7 +585,7 @@
         "firm_file": "252693"
     },
     {
-        "county": "Ripley",
+        "county": "St. Louis",
         "property_address": "1534 Comet",
         "property_city": "Drive",
         "property_zip": "Bellefontaine",
@@ -713,18 +674,5 @@
         "sale_location_city": "N/A",
         "civil_case_no": "Hartville",
         "firm_file": "253140"
-    },
-    {
-        "county": "Wright",
-        "property_address": "Information Reported as of: 8/11/2025 12:15:04 PM 13160",
-        "property_city": "Foster,",
-        "property_zip": "Ste.",
-        "sale_date": "100,",
-        "sale_time": "Overland",
-        "continued_date_time": "Park,",
-        "opening_bid": "Kansas",
-        "sale_location_city": "66213",
-        "civil_case_no": "(913)663-7600",
-        "firm_file": "4"
     }
 ]
