@@ -13,30 +13,17 @@ records = []
 current_county = None
 
 # Loosened county detection:
+# - Optional "City of "
+# - Allows letters, spaces, periods, apostrophes, and hyphens
+# - No digits allowed
 county_pattern = re.compile(r"^(City of\s+)?[A-Za-z.\-'\s]+$")
 
+# Words to skip when scanning headings
 ignore_headings = [
     "information reported as of",
     "sale date",
     "property address"
 ]
-
-def is_county_line(line):
-    """Return True if line looks like a county heading, not a property row."""
-    if not county_pattern.match(line):
-        return False
-    if re.search(r"\d", line):  # county names shouldn't have digits
-        return False
-    if re.search(r"\b\d{5}\b", line):  # ZIP code present → not a county
-        return False
-    if re.search(r"\d{1,2}/\d{1,2}/\d{4}", line):  # date present → not a county
-        return False
-    if "$" in line:  # bid amount present → not a county
-        return False
-    # Optional: prevent very short names like "St Louis" from being mistaken unless preceded by "County"
-    if len(line.split()) <= 3 and "county" not in line.lower() and not line.lower().startswith("city of"):
-        return False
-    return True
 
 with pdfplumber.open(pdf_file) as pdf:
     for page in pdf.pages:
@@ -47,22 +34,26 @@ with pdfplumber.open(pdf_file) as pdf:
         for line in text.split("\n"):
             line_clean = line.strip()
 
+            # Skip obvious junk lines
             if any(kw in line_clean.lower() for kw in ignore_headings):
                 continue
 
-            # Detect county heading using stricter function
-            if is_county_line(line_clean):
+            # Detect county heading (must not contain digits)
+            if county_pattern.match(line_clean) and not re.search(r"\d", line_clean):
                 current_county = line_clean.strip()
                 print(f"Detected county: {current_county}")
                 continue
 
+            # Skip header rows in property table
             if "Property Address" in line_clean:
                 continue
 
+            # Split row into parts
             parts = line_clean.split()
             if len(parts) < 10:
                 continue
 
+            # Extract columns based on position
             firm_file = parts[-1]
             civil_case = parts[-2]
             sale_city = parts[-3]
