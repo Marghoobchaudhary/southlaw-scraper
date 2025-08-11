@@ -11,6 +11,9 @@ pdf_file = BytesIO(response.content)
 records = []
 current_county = None
 
+# County heading regex: allows City of, periods, apostrophes, hyphens, spaces
+county_pattern = re.compile(r"^(City of\s+)?[A-Za-z.\-'\s]+$")
+
 with pdfplumber.open(pdf_file) as pdf:
     for page in pdf.pages:
         text = page.extract_text()
@@ -18,18 +21,24 @@ with pdfplumber.open(pdf_file) as pdf:
             continue
 
         for line in text.split("\n"):
-            # Detect county headings (allow periods)
-            if re.match(r"^[A-Z\s.]+$", line.strip()) and len(line.strip()) > 3:
-                current_county = line.strip().title()
+            line_clean = line.strip()
+
+            # County detection — must look like a county name AND not like a property row
+            if (
+                county_pattern.match(line_clean) and 
+                not re.search(r"\d", line_clean) and  # no numbers
+                len(line_clean.split()) <= 5           # short enough to be a heading
+            ):
+                current_county = line_clean
                 print(f"Detected county: {current_county}")
                 continue
 
-            # Skip header rows
-            if "Property Address" in line:
+            # Skip table headers
+            if "Property Address" in line_clean:
                 continue
 
-            # Split row by spaces
-            parts = line.strip().split()
+            # Split into columns
+            parts = line_clean.split()
             if len(parts) < 10:
                 continue
 
@@ -42,10 +51,10 @@ with pdfplumber.open(pdf_file) as pdf:
             sale_date = parts[-7]
             zip_code = parts[-8]
             city = parts[-9]
-            address = " ".join(parts[0:-9])
+            address = " ".join(parts[:-9])
 
             records.append({
-                "county": current_county,
+                "county": current_county if current_county else "N/A",
                 "property_address": address,
                 "property_city": city,
                 "property_zip": zip_code,
@@ -58,7 +67,7 @@ with pdfplumber.open(pdf_file) as pdf:
                 "firm_file": firm_file
             })
 
-# Save to JSON
+# Save JSON
 with open("sales_report.json", "w", encoding="utf-8") as f:
     json.dump(records, f, indent=4)
 
