@@ -11,29 +11,21 @@ pdf_file = BytesIO(response.content)
 records = []
 current_county = None
 
-# Helper: is this line a county heading?
 def is_county_heading(line):
-    # Trim spaces
-    txt = line.strip()
-    # Ignore empty lines
-    if not txt:
+    # Clean up extra spaces
+    cleaned = re.sub(r"\s+", " ", line.strip())
+    if not cleaned:
         return False
-    # Must be mostly uppercase or capitalized
-    if not re.match(r"^[A-Z\s\.\-]+$", txt):
+    # No numbers, $ signs, or slashes in county names
+    if re.search(r"[\d/$]", cleaned):
         return False
-    # Short enough to be a heading
-    if len(txt.split()) > 5:
+    # County headings are usually short (under 40 chars)
+    if len(cleaned) > 40:
         return False
-    # No dates
-    if re.search(r"\d{1,2}/\d{1,2}/\d{2,4}", txt):
-        return False
-    # No zip codes
-    if re.search(r"\b\d{5}\b", txt):
-        return False
-    # No dollar signs
-    if "$" in txt:
-        return False
-    return True
+    # All uppercase with optional dots, hyphens, and spaces
+    if re.match(r"^[A-Z .\-]+$", cleaned):
+        return True
+    return False
 
 with pdfplumber.open(pdf_file) as pdf:
     for page in pdf.pages:
@@ -44,14 +36,15 @@ with pdfplumber.open(pdf_file) as pdf:
         for line in text.split("\n"):
             # Detect county headings
             if is_county_heading(line):
-                current_county = line.strip().title()
+                current_county = re.sub(r"\s+", " ", line.strip())  # preserve original casing from PDF
                 print(f"Detected county: {current_county}")
                 continue
 
-            # Skip the table header
+            # Skip header rows
             if "Property Address" in line:
                 continue
 
+            # Split row by spaces
             parts = line.strip().split()
             if len(parts) < 10:
                 continue
