@@ -12,13 +12,8 @@ pdf_file = BytesIO(response.content)
 records = []
 current_county = None
 
-# Looser county detection:
-# - Optional "City of "
-# - Allows letters, spaces, periods, apostrophes, and hyphens
-# - No digits allowed
 county_pattern = re.compile(r"^(City of\s+)?[A-Za-z.\-'\s]+$", re.IGNORECASE)
 
-# Words to skip when scanning headings
 ignore_headings = [
     "information reported as of",
     "sale date",
@@ -38,36 +33,38 @@ with pdfplumber.open(pdf_file) as pdf:
         for line in text.split("\n"):
             line_clean = clean_line(line)
 
-            # Skip obvious junk lines
             if any(kw in line_clean.lower() for kw in ignore_headings):
                 continue
 
-            # Detect county heading (must not contain digits)
             if not re.search(r"\d", line_clean) and county_pattern.match(line_clean):
                 current_county = line_clean.strip()
-                print(f"Detected county: {current_county}")
                 continue
 
-            # Skip header rows in property table
             if "Property Address" in line_clean:
                 continue
 
-            # Split row into parts
             parts = line_clean.split()
-            if len(parts) < 10:
-                continue
 
-            # Extract columns based on position
-            firm_file = parts[-1]
-            civil_case = parts[-2]
-            sale_city = parts[-3]
-            bid = parts[-4]
-            continued = parts[-5]
-            sale_time = parts[-6]
-            sale_date = parts[-7]
-            zip_code = parts[-8]
-            city = parts[-9]
-            address = " ".join(parts[:-9])
+            # Try to detect ZIP (5-digit number) to split reliably
+            zip_idx = None
+            for i, token in enumerate(parts):
+                if re.fullmatch(r"\d{5}", token):
+                    zip_idx = i
+                    break
+
+            if zip_idx is None:
+                continue  # no ZIP code found, skip
+
+            address = " ".join(parts[:zip_idx-1])  # up to city
+            city = parts[zip_idx-1]
+            zip_code = parts[zip_idx]
+            sale_date = parts[zip_idx+1]
+            sale_time = parts[zip_idx+2]
+            continued = parts[zip_idx+3]
+            opening_bid = parts[zip_idx+4]
+            sale_location_city = parts[zip_idx+5]
+            civil_case_no = parts[zip_idx+6]
+            firm_file = parts[zip_idx+7] if len(parts) > zip_idx+7 else ""
 
             records.append({
                 "county": current_county if current_county else "N/A",
@@ -77,13 +74,13 @@ with pdfplumber.open(pdf_file) as pdf:
                 "sale_date": sale_date,
                 "sale_time": sale_time,
                 "continued_date_time": continued,
-                "opening_bid": bid,
-                "sale_location_city": sale_city,
-                "civil_case_no": civil_case,
+                "opening_bid": opening_bid,
+                "sale_location_city": sale_location_city,
+                "civil_case_no": civil_case_no,
                 "firm_file": firm_file
             })
 
-# Save extracted records to JSON
+# Save to JSON
 with open("sales_report.json", "w", encoding="utf-8") as f:
     json.dump(records, f, indent=4)
 
