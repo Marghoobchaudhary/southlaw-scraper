@@ -4,6 +4,7 @@ import json
 from io import BytesIO
 import re
 
+# PDF URL
 url = "https://www.southlaw.com/report/Sales_Report_MO.pdf"
 response = requests.get(url)
 pdf_file = BytesIO(response.content)
@@ -11,23 +12,17 @@ pdf_file = BytesIO(response.content)
 records = []
 current_county = None
 
-county_pattern = re.compile(r"^(City of\s+)?[A-Za-z.\-'\s]+$", re.IGNORECASE)
+# Loosened county detection
+county_pattern = re.compile(r"^(City of\s+)?[A-Za-z.\-'\s]+$")
 
+# Words to skip
 ignore_headings = [
     "information reported as of",
     "sale date",
     "property address"
 ]
 
-def clean_line(line):
-    return re.sub(r"[^\x20-\x7E]+", "", line).strip()
-
-def is_zip(token):
-    return re.fullmatch(r"\d{5}", token) is not None
-
-def is_sale_line(line):
-    # Looks for date format M/D/YYYY at start
-    return bool(re.match(r"\d{1,2}/\d{1,2}/\d{4}", line))
+sale_date_pattern = re.compile(r"\d{1,2}/\d{1,2}/\d{4}")
 
 with pdfplumber.open(pdf_file) as pdf:
     for page in pdf.pages:
@@ -35,59 +30,48 @@ with pdfplumber.open(pdf_file) as pdf:
         if not text:
             continue
 
-        lines = [clean_line(l) for l in text.split("\n") if clean_line(l)]
+        prev_line = None  # to hold address if split over two lines
 
-        i = 0
-        while i < len(lines):
-            line = lines[i]
+        for line in text.split("\n"):
+            line_clean = line.strip()
 
-            if any(kw in line.lower() for kw in ignore_headings):
-                i += 1
+            # Skip obvious junk lines
+            if any(kw in line_clean.lower() for kw in ignore_headings):
                 continue
 
-            if not re.search(r"\d", line) and county_pattern.match(line):
-                current_county = line.strip()
-                i += 1
+            # Detect county name
+            if county_pattern.match(line_clean) and not re.search(r"\d", line_clean):
+                current_county = line_clean.strip()
+                prev_line = None
                 continue
 
-            if "Property Address" in line:
-                i += 1
+            if "Property Address" in line_clean:
                 continue
 
-            parts = line.split()
+            parts = line_clean.split()
 
-            # If this looks like an address ending in ZIP but no sale date after it
-            if len(parts) >= 3 and is_zip(parts[-1]) and (i+1 < len(lines)) and is_sale_line(lines[i+1]):
-                # Merge with next line
-                line = line + " " + lines[i+1]
-                i += 1  # skip next line because we've merged
-                parts = line.split()
+            # If this line contains a sale date but too few parts, merge with previous line
+            if sale_date_pattern.search(line_clean) and len(parts) < 10 and prev_line:
+                line_clean = prev_line + " " + line_clean
+                parts = line_clean.split()
 
-            # Find ZIP index
-            zip_idx = None
-            for idx, token in enumerate(parts):
-                if is_zip(token):
-                    zip_idx = idx
-                    break
-            if zip_idx is None:
-                i += 1
+            if len(parts) < 10:
+                prev_line = line_clean  # store for possible merge with next line
                 continue
 
-            # Must have enough tokens after ZIP to get all sale info
-            if len(parts) < zip_idx + 8:
-                i += 1
-                continue
+            prev_line = None  # reset after successful parse
 
-            address = " ".join(parts[:zip_idx-1])
-            city = parts[zip_idx-1]
-            zip_code = parts[zip_idx]
-            sale_date = parts[zip_idx+1]
-            sale_time = parts[zip_idx+2]
-            continued = parts[zip_idx+3]
-            opening_bid = parts[zip_idx+4]
-            sale_location_city = parts[zip_idx+5]
-            civil_case_no = parts[zip_idx+6]
-            firm_file = parts[zip_idx+7] if len(parts) > zip_idx+7 else ""
+            # Extract columns based on position
+            firm_file = parts[-1]
+            civil_case = parts[-2]
+            sale_city = parts[-3]
+            bid = parts[-4]
+            continued = parts[-5]
+            sale_time = parts[-6]
+            sale_date = parts[-7]
+            zip_code = parts[-8]
+            city = parts[-9]
+            address = " ".join(parts[:-9])
 
             records.append({
                 "county": current_county if current_county else "N/A",
@@ -97,14 +81,13 @@ with pdfplumber.open(pdf_file) as pdf:
                 "sale_date": sale_date,
                 "sale_time": sale_time,
                 "continued_date_time": continued,
-                "opening_bid": opening_bid,
-                "sale_location_city": sale_location_city,
-                "civil_case_no": civil_case_no,
+                "opening_bid": bid,
+                "sale_location_city": sale_city,
+                "civil_case_no": civil_case,
                 "firm_file": firm_file
             })
 
-            i += 1
-
+# Save extracted records to JSON
 with open("sales_report.json", "w", encoding="utf-8") as f:
     json.dump(records, f, indent=4)
 
