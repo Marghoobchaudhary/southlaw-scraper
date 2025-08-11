@@ -12,25 +12,21 @@ pdf_file = BytesIO(response.content)
 records = []
 current_county = None
 
-# Loosened county detection
+# County detection (loosened)
 county_pattern = re.compile(r"^(City of\s+)?[A-Za-z.\-'\s]+$")
 
-# Words to skip
+# Ignore heading lines
 ignore_headings = [
     "information reported as of",
     "sale date",
     "property address"
 ]
 
-sale_date_pattern = re.compile(r"\d{1,2}/\d{1,2}/\d{4}")
-
 with pdfplumber.open(pdf_file) as pdf:
     for page in pdf.pages:
         text = page.extract_text()
         if not text:
             continue
-
-        prev_line = None  # to hold address if split over two lines
 
         for line in text.split("\n"):
             line_clean = line.strip()
@@ -39,39 +35,40 @@ with pdfplumber.open(pdf_file) as pdf:
             if any(kw in line_clean.lower() for kw in ignore_headings):
                 continue
 
-            # Detect county name
+            # Detect county heading
             if county_pattern.match(line_clean) and not re.search(r"\d", line_clean):
                 current_county = line_clean.strip()
-                prev_line = None
+                print(f"Detected county: {current_county}")
                 continue
 
+            # Skip property table headers
             if "Property Address" in line_clean:
                 continue
 
             parts = line_clean.split()
 
-            # If this line contains a sale date but too few parts, merge with previous line
-            if sale_date_pattern.search(line_clean) and len(parts) < 10 and prev_line:
-                line_clean = prev_line + " " + line_clean
-                parts = line_clean.split()
+            # Find ZIP code position (first 5-digit number)
+            zip_idx = None
+            for i, token in enumerate(parts):
+                if re.fullmatch(r"\d{5}", token):
+                    zip_idx = i
+                    break
 
-            if len(parts) < 10:
-                prev_line = line_clean  # store for possible merge with next line
+            # If ZIP not found or not enough columns after ZIP → skip
+            if zip_idx is None or zip_idx + 7 >= len(parts):
                 continue
 
-            prev_line = None  # reset after successful parse
-
-            # Extract columns based on position
-            firm_file = parts[-1]
-            civil_case = parts[-2]
-            sale_city = parts[-3]
-            bid = parts[-4]
-            continued = parts[-5]
-            sale_time = parts[-6]
-            sale_date = parts[-7]
-            zip_code = parts[-8]
-            city = parts[-9]
-            address = " ".join(parts[:-9])
+            # Extract fields dynamically
+            address = " ".join(parts[:zip_idx - 1])
+            city = " ".join(parts[zip_idx - 1:zip_idx])
+            zip_code = parts[zip_idx]
+            sale_date = parts[zip_idx + 1]
+            sale_time = parts[zip_idx + 2]
+            continued = parts[zip_idx + 3]
+            bid = parts[zip_idx + 4]
+            sale_city = parts[zip_idx + 5]
+            civil_case = parts[zip_idx + 6]
+            firm_file = parts[zip_idx + 7]
 
             records.append({
                 "county": current_county if current_county else "N/A",
