@@ -12,11 +12,11 @@ pdf_file = BytesIO(response.content)
 records = []
 current_county = None
 
-# Loosened county detection:
+# Looser county detection:
 # - Optional "City of "
 # - Allows letters, spaces, periods, apostrophes, and hyphens
 # - No digits allowed
-county_pattern = re.compile(r"^(City of\s+)?[A-Za-z.\-'\s]+$")
+county_pattern = re.compile(r"^(City of\s+)?[A-Za-z.\-'\s]+$", re.IGNORECASE)
 
 # Words to skip when scanning headings
 ignore_headings = [
@@ -25,6 +25,10 @@ ignore_headings = [
     "property address"
 ]
 
+def clean_line(line):
+    """Remove non-printable characters and normalize spaces."""
+    return re.sub(r"[^\x20-\x7E]+", "", line).strip()
+
 with pdfplumber.open(pdf_file) as pdf:
     for page in pdf.pages:
         text = page.extract_text()
@@ -32,14 +36,14 @@ with pdfplumber.open(pdf_file) as pdf:
             continue
 
         for line in text.split("\n"):
-            line_clean = line.strip()
+            line_clean = clean_line(line)
 
             # Skip obvious junk lines
             if any(kw in line_clean.lower() for kw in ignore_headings):
                 continue
 
             # Detect county heading (must not contain digits)
-            if county_pattern.match(line_clean) and not re.search(r"\d", line_clean):
+            if not re.search(r"\d", line_clean) and county_pattern.match(line_clean):
                 current_county = line_clean.strip()
                 print(f"Detected county: {current_county}")
                 continue
