@@ -12,16 +12,57 @@ pdf_file = BytesIO(response.content)
 records = []
 current_county = None
 
-# County heading regex
-county_pattern = re.compile(r"^(City of\s+)?[A-Za-z.\-'\s]+$")
+# ZIP to County mapping for overrides
+stl_zip_to_county = {
+    # St. Louis County
+    "63005": "St. Louis",
+    "63011": "St. Louis",
+    "63017": "St. Louis",
+    "63021": "St. Louis",
+    "63121": "St. Louis",
+    "63122": "St. Louis",
+    "63123": "St. Louis",
+    "63124": "St. Louis",
+    "63125": "St. Louis",
+    "63126": "St. Louis",
+    "63127": "St. Louis",
+    "63128": "St. Louis",
+    "63129": "St. Louis",
+    "63130": "St. Louis",
+    "63131": "St. Louis",
+    "63132": "St. Louis",
+    "63133": "St. Louis",
+    "63134": "St. Louis",
+    "63135": "St. Louis",
+    "63136": "St. Louis",
+    "63137": "St. Louis",
+    "63138": "St. Louis",
+    "63140": "St. Louis",
+    "63141": "St. Louis",
+    "63143": "St. Louis",
+    "63144": "St. Louis",
+    "63146": "St. Louis",
 
-def is_possible_county(line):
-    """Check if a line could be a county heading."""
-    return (
-        county_pattern.match(line)
-        and not re.search(r"\d", line)  # no numbers
-        and len(line.split()) <= 5      # short enough to be a heading
-    )
+    # City of St. Louis
+    "63101": "City of St. Louis",
+    "63102": "City of St. Louis",
+    "63103": "City of St. Louis",
+    "63104": "City of St. Louis",
+    "63106": "City of St. Louis",
+    "63107": "City of St. Louis",
+    "63108": "City of St. Louis",
+    "63109": "City of St. Louis",
+    "63110": "City of St. Louis",
+    "63111": "City of St. Louis",
+    "63112": "City of St. Louis",
+    "63113": "City of St. Louis",
+    "63115": "City of St. Louis",
+    "63116": "City of St. Louis",
+    "63118": "City of St. Louis",
+    "63120": "City of St. Louis",
+    "63139": "City of St. Louis",
+    "63147": "City of St. Louis",
+}
 
 with pdfplumber.open(pdf_file) as pdf:
     for page in pdf.pages:
@@ -29,65 +70,48 @@ with pdfplumber.open(pdf_file) as pdf:
         if not text:
             continue
 
-        lines = text.split("\n")
-        i = 0
-        while i < len(lines):
-            line_clean = lines[i].strip()
-
-            # Merge broken county names
-            if (
-                i + 1 < len(lines)
-                and len(line_clean.split()) <= 2
-                and len(lines[i+1].strip().split()) <= 2
-                and is_possible_county(line_clean)
-                and is_possible_county(lines[i+1].strip())
-            ):
-                merged_line = f"{line_clean} {lines[i+1].strip()}"
-                if is_possible_county(merged_line):
-                    line_clean = merged_line
-                    i += 1  # skip the next line since it's merged
-
-            # Detect county heading
-            if is_possible_county(line_clean):
-                current_county = line_clean
-                print(f"Detected county: {current_county}")
-                i += 1
+        for line in text.split("\n"):
+            # Detect county headings (allow periods)
+            if re.match(r"^[A-Z\s.]+$", line.strip()) and len(line.strip()) > 3:
+                current_county = line.strip().title()
                 continue
 
-            # Skip headers
-            if "Property Address" in line_clean:
-                i += 1
+            # Skip header rows
+            if "Property Address" in line:
                 continue
 
-            # Parse property row
-            parts = line_clean.split()
-            if len(parts) >= 10:
-                firm_file = parts[-1]
-                civil_case = parts[-2]
-                sale_city = parts[-3]
-                bid = parts[-4]
-                continued = parts[-5]
-                sale_time = parts[-6]
-                sale_date = parts[-7]
-                zip_code = parts[-8]
-                city = parts[-9]
-                address = " ".join(parts[:-9])
+            # Split row by spaces
+            parts = line.strip().split()
+            if len(parts) < 10:
+                continue
 
-                records.append({
-                    "county": current_county if current_county else "N/A",
-                    "property_address": address,
-                    "property_city": city,
-                    "property_zip": zip_code,
-                    "sale_date": sale_date,
-                    "sale_time": sale_time,
-                    "continued_date_time": continued,
-                    "opening_bid": bid,
-                    "sale_location_city": sale_city,
-                    "civil_case_no": civil_case,
-                    "firm_file": firm_file
-                })
+            firm_file = parts[-1]
+            civil_case = parts[-2]
+            sale_city = parts[-3]
+            bid = parts[-4]
+            continued = parts[-5]
+            sale_time = parts[-6]
+            sale_date = parts[-7]
+            zip_code = parts[-8]
+            city = parts[-9]
+            address = " ".join(parts[0:-9])
 
-            i += 1
+            # If ZIP matches St. Louis or City of St. Louis, override county
+            county = stl_zip_to_county.get(zip_code, current_county)
+
+            records.append({
+                "county": county,
+                "property_address": address,
+                "property_city": city,
+                "property_zip": zip_code,
+                "sale_date": sale_date,
+                "sale_time": sale_time,
+                "continued_date_time": continued,
+                "opening_bid": bid,
+                "sale_location_city": sale_city,
+                "civil_case_no": civil_case,
+                "firm_file": firm_file
+            })
 
 # Save to JSON
 with open("sales_report.json", "w", encoding="utf-8") as f:
