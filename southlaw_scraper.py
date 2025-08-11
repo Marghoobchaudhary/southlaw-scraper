@@ -4,7 +4,6 @@ import json
 from io import BytesIO
 import re
 
-# PDF URL
 url = "https://www.southlaw.com/report/Sales_Report_MO.pdf"
 response = requests.get(url)
 pdf_file = BytesIO(response.content)
@@ -21,8 +20,14 @@ ignore_headings = [
 ]
 
 def clean_line(line):
-    """Remove non-printable characters and normalize spaces."""
     return re.sub(r"[^\x20-\x7E]+", "", line).strip()
+
+def is_zip(token):
+    return re.fullmatch(r"\d{5}", token) is not None
+
+def is_sale_line(line):
+    # Looks for date format M/D/YYYY at start
+    return bool(re.match(r"\d{1,2}/\d{1,2}/\d{4}", line))
 
 with pdfplumber.open(pdf_file) as pdf:
     for page in pdf.pages:
@@ -30,32 +35,50 @@ with pdfplumber.open(pdf_file) as pdf:
         if not text:
             continue
 
-        for line in text.split("\n"):
-            line_clean = clean_line(line)
+        lines = [clean_line(l) for l in text.split("\n") if clean_line(l)]
 
-            if any(kw in line_clean.lower() for kw in ignore_headings):
+        i = 0
+        while i < len(lines):
+            line = lines[i]
+
+            if any(kw in line.lower() for kw in ignore_headings):
+                i += 1
                 continue
 
-            if not re.search(r"\d", line_clean) and county_pattern.match(line_clean):
-                current_county = line_clean.strip()
+            if not re.search(r"\d", line) and county_pattern.match(line):
+                current_county = line.strip()
+                i += 1
                 continue
 
-            if "Property Address" in line_clean:
+            if "Property Address" in line:
+                i += 1
                 continue
 
-            parts = line_clean.split()
+            parts = line.split()
 
-            # Try to detect ZIP (5-digit number) to split reliably
+            # If this looks like an address ending in ZIP but no sale date after it
+            if len(parts) >= 3 and is_zip(parts[-1]) and (i+1 < len(lines)) and is_sale_line(lines[i+1]):
+                # Merge with next line
+                line = line + " " + lines[i+1]
+                i += 1  # skip next line because we've merged
+                parts = line.split()
+
+            # Find ZIP index
             zip_idx = None
-            for i, token in enumerate(parts):
-                if re.fullmatch(r"\d{5}", token):
-                    zip_idx = i
+            for idx, token in enumerate(parts):
+                if is_zip(token):
+                    zip_idx = idx
                     break
-
             if zip_idx is None:
-                continue  # no ZIP code found, skip
+                i += 1
+                continue
 
-            address = " ".join(parts[:zip_idx-1])  # up to city
+            # Must have enough tokens after ZIP to get all sale info
+            if len(parts) < zip_idx + 8:
+                i += 1
+                continue
+
+            address = " ".join(parts[:zip_idx-1])
             city = parts[zip_idx-1]
             zip_code = parts[zip_idx]
             sale_date = parts[zip_idx+1]
@@ -80,7 +103,8 @@ with pdfplumber.open(pdf_file) as pdf:
                 "firm_file": firm_file
             })
 
-# Save to JSON
+            i += 1
+
 with open("sales_report.json", "w", encoding="utf-8") as f:
     json.dump(records, f, indent=4)
 
