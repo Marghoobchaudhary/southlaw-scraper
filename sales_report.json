@@ -11,7 +11,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Columbia",
         "Firm File#": "253139",
-        "scraped_at": "2025-08-12T17:21:41.780484Z"
+        "scraped_at": "2025-08-12T17:54:40.075947Z"
     },
     {
         "County": "Butler",
@@ -25,7 +25,7 @@
         "Sale Location(City)": "Poplar",
         "Civil Case No.": "Bluff",
         "Firm File#": "251488",
-        "scraped_at": "2025-08-12T17:21:41.780517Z"
+        "scraped_at": "2025-08-12T17:54:40.075978Z"
     },
     {
         "County": "Cass",
@@ -39,7 +39,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Harrisonville",
         "Firm File#": "243587",
-        "scraped_at": "2025-08-12T17:21:41.780534Z"
+        "scraped_at": "2025-08-12T17:54:40.075995Z"
     },
     {
         "County": "Cass",
@@ -53,7 +53,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Harrisonville",
         "Firm File#": "251927",
-        "scraped_at": "2025-08-12T17:21:41.780546Z"
+        "scraped_at": "2025-08-12T17:54:40.076007Z"
     },
     {
         "County": "City of St. Louis",
@@ -67,21 +67,7 @@
         "Sale Location(City)": "St.",
         "Civil Case No.": "Louis",
         "Firm File#": "248121",
-        "scraped_at": "2025-08-12T17:21:41.780564Z"
-    },
-    {
-        "County": "Clay",
-        "Property Address": "7 Carver Place",
-        "Property City": "Smithville",
-        "Property Zip": "64089",
-        "Sale Date": "8/21/2025",
-        "Sale Time": "12:00PM",
-        "Continued Date/Time": "N/A",
-        "Opening Bid": "N/A",
-        "Sale Location(City)": "",
-        "Civil Case No.": "Liberty",
-        "Firm File#": "208811",
-        "scraped_at": "2025-08-12T17:21:41.780579Z"
+        "scraped_at": "2025-08-12T17:54:40.076025Z"
     },
     {
         "County": "Clay",
@@ -95,7 +81,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Liberty",
         "Firm File#": "252318",
-        "scraped_at": "2025-08-12T17:21:41.780595Z"
+        "scraped_at": "2025-08-12T17:54:40.076045Z"
     },
     {
         "County": "Clay",
@@ -109,7 +95,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Liberty",
         "Firm File#": "242645",
-        "scraped_at": "2025-08-12T17:21:41.780606Z"
+        "scraped_at": "2025-08-12T17:54:40.076056Z"
     },
     {
         "County": "Clay",
@@ -123,7 +109,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Liberty",
         "Firm File#": "245509",
-        "scraped_at": "2025-08-12T17:21:41.780615Z"
+        "scraped_at": "2025-08-12T17:54:40.076066Z"
     },
     {
         "County": "Dunklin",
@@ -137,7 +123,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Kennett",
         "Firm File#": "251011",
-        "scraped_at": "2025-08-12T17:21:41.780630Z"
+        "scraped_at": "2025-08-12T17:54:40.076082Z"
     },
     {
         "County": "Gasconade",
@@ -151,7 +137,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Hermann",
         "Firm File#": "251740",
-        "scraped_at": "2025-08-12T17:21:41.780646Z"
+        "scraped_at": "2025-08-12T17:54:40.076098Z"
     },
     {
         "County": "Greene",
@@ -165,7 +151,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Springfield",
         "Firm File#": "252727",
-        "scraped_at": "2025-08-12T17:21:41.780661Z"
+        "scraped_at": "2025-08-12T17:54:40.076114Z"
     },
     {
         "County": "Jackson",
@@ -179,7 +165,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Independence",
         "Firm File#": "252532",
-        "scraped_at": "2025-08-12T17:21:41.899316Z"
+        "scraped_at": "2025-08-12T17:54:40.183481Z"
     },
     {
         "County": "Jackson",
@@ -193,7 +179,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Independence",
         "Firm File#": "252939",
-        "scraped_at": "2025-08-12T17:21:41.899341Z"
+        "scraped_at": "2025-08-12T17:54:40.183499Z"
     },
     {
         "County": "Jackson",
@@ -207,7 +193,7 @@
         "Sale Location(City)": "Kansas",
         "Civil Case No.": "City",
         "Firm File#": "253109",
-        "scraped_at": "2025-08-12T17:21:41.899355Z"
+        "scraped_at": "2025-08-12T17:54:40.183513Z"
     },
     {
         "County": "Jackson",
@@ -221,7 +207,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Independence",
         "Firm File#": "211732",
-        "scraped_at": "2025-08-12T17:21:41.899367Z"
+        "scraped_at": "2025-08-12T17:54:40.183524Z"
     },
     {
         "County": "Jackson",
@@ -235,7 +221,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Independence",
         "Firm File#": "252899",
-        "scraped_at": "2025-08-12T17:21:41.899378Z"
+        "scraped_at": "2025-08-12T17:54:40.183536Z"
     },
     {
         "County": "Jackson",
@@ -249,7 +235,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Independence",
         "Firm File#": "249684",
-        "scraped_at": "2025-08-12T17:21:41.899388Z"
+        "scraped_at": "2025-08-12T17:54:40.183547Z"
     },
     {
         "County": "Jackson",
@@ -263,7 +249,7 @@
         "Sale Location(City)": "Kansas",
         "Civil Case No.": "City",
         "Firm File#": "252598",
-        "scraped_at": "2025-08-12T17:21:41.899399Z"
+        "scraped_at": "2025-08-12T17:54:40.183558Z"
     },
     {
         "County": "Jackson",
@@ -277,7 +263,7 @@
         "Sale Location(City)": "Kansas",
         "Civil Case No.": "City",
         "Firm File#": "252465",
-        "scraped_at": "2025-08-12T17:21:41.899410Z"
+        "scraped_at": "2025-08-12T17:54:40.183570Z"
     },
     {
         "County": "Jackson",
@@ -291,7 +277,7 @@
         "Sale Location(City)": "Kansas",
         "Civil Case No.": "City",
         "Firm File#": "253218",
-        "scraped_at": "2025-08-12T17:21:41.899421Z"
+        "scraped_at": "2025-08-12T17:54:40.183581Z"
     },
     {
         "County": "Jackson",
@@ -305,7 +291,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Independence",
         "Firm File#": "247616",
-        "scraped_at": "2025-08-12T17:21:41.899431Z"
+        "scraped_at": "2025-08-12T17:54:40.183592Z"
     },
     {
         "County": "Jackson",
@@ -319,7 +305,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Independence",
         "Firm File#": "252600",
-        "scraped_at": "2025-08-12T17:21:41.899440Z"
+        "scraped_at": "2025-08-12T17:54:40.183603Z"
     },
     {
         "County": "Jackson",
@@ -333,7 +319,7 @@
         "Sale Location(City)": "Kansas",
         "Civil Case No.": "City",
         "Firm File#": "251883",
-        "scraped_at": "2025-08-12T17:21:41.899451Z"
+        "scraped_at": "2025-08-12T17:54:40.183613Z"
     },
     {
         "County": "Jackson",
@@ -347,7 +333,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Independence",
         "Firm File#": "253494",
-        "scraped_at": "2025-08-12T17:21:41.899464Z"
+        "scraped_at": "2025-08-12T17:54:40.183623Z"
     },
     {
         "County": "Jackson",
@@ -361,7 +347,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Independence",
         "Firm File#": "248162",
-        "scraped_at": "2025-08-12T17:21:41.899474Z"
+        "scraped_at": "2025-08-12T17:54:40.183633Z"
     },
     {
         "County": "Jackson",
@@ -375,7 +361,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Independence",
         "Firm File#": "253005",
-        "scraped_at": "2025-08-12T17:21:41.899483Z"
+        "scraped_at": "2025-08-12T17:54:40.183643Z"
     },
     {
         "County": "Jasper",
@@ -389,7 +375,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Carthage",
         "Firm File#": "252596",
-        "scraped_at": "2025-08-12T17:21:41.899498Z"
+        "scraped_at": "2025-08-12T17:54:40.183657Z"
     },
     {
         "County": "Jefferson",
@@ -403,7 +389,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Hillsboro",
         "Firm File#": "251880",
-        "scraped_at": "2025-08-12T17:21:41.899513Z"
+        "scraped_at": "2025-08-12T17:54:40.183673Z"
     },
     {
         "County": "Jefferson",
@@ -417,7 +403,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Hillsboro",
         "Firm File#": "247799",
-        "scraped_at": "2025-08-12T17:21:41.899523Z"
+        "scraped_at": "2025-08-12T17:54:40.183684Z"
     },
     {
         "County": "Jefferson",
@@ -431,7 +417,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Hillsboro",
         "Firm File#": "247371",
-        "scraped_at": "2025-08-12T17:21:41.899534Z"
+        "scraped_at": "2025-08-12T17:54:40.183694Z"
     },
     {
         "County": "Jefferson",
@@ -445,7 +431,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Hillsboro",
         "Firm File#": "246375",
-        "scraped_at": "2025-08-12T17:21:41.899543Z"
+        "scraped_at": "2025-08-12T17:54:40.183704Z"
     },
     {
         "County": "Jefferson",
@@ -459,7 +445,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Hillsboro",
         "Firm File#": "251220",
-        "scraped_at": "2025-08-12T17:21:41.899554Z"
+        "scraped_at": "2025-08-12T17:54:40.183714Z"
     },
     {
         "County": "Lewis",
@@ -473,7 +459,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Monticello",
         "Firm File#": "252799",
-        "scraped_at": "2025-08-12T17:21:41.964379Z"
+        "scraped_at": "2025-08-12T17:54:40.247012Z"
     },
     {
         "County": "Mississippi",
@@ -487,7 +473,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Charleston",
         "Firm File#": "252800",
-        "scraped_at": "2025-08-12T17:21:41.964406Z"
+        "scraped_at": "2025-08-12T17:54:40.247033Z"
     },
     {
         "County": "Newton",
@@ -501,7 +487,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Neosho",
         "Firm File#": "249933",
-        "scraped_at": "2025-08-12T17:21:41.964422Z"
+        "scraped_at": "2025-08-12T17:54:40.247049Z"
     },
     {
         "County": "Pettis",
@@ -515,7 +501,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Sedalia",
         "Firm File#": "253202",
-        "scraped_at": "2025-08-12T17:21:41.964438Z"
+        "scraped_at": "2025-08-12T17:54:40.247065Z"
     },
     {
         "County": "Pike",
@@ -529,7 +515,7 @@
         "Sale Location(City)": "Bowling",
         "Civil Case No.": "Green",
         "Firm File#": "251385",
-        "scraped_at": "2025-08-12T17:21:41.964455Z"
+        "scraped_at": "2025-08-12T17:54:40.247082Z"
     },
     {
         "County": "Ray",
@@ -543,7 +529,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Richmond",
         "Firm File#": "252641",
-        "scraped_at": "2025-08-12T17:21:41.964470Z"
+        "scraped_at": "2025-08-12T17:54:40.247097Z"
     },
     {
         "County": "Ripley",
@@ -557,7 +543,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Doniphan",
         "Firm File#": "251334",
-        "scraped_at": "2025-08-12T17:21:41.964485Z"
+        "scraped_at": "2025-08-12T17:54:40.247111Z"
     },
     {
         "County": "St. Francois",
@@ -571,7 +557,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Farmington",
         "Firm File#": "252693",
-        "scraped_at": "2025-08-12T17:21:41.964500Z"
+        "scraped_at": "2025-08-12T17:54:40.247127Z"
     },
     {
         "County": "St. Louis",
@@ -585,7 +571,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Clayton",
         "Firm File#": "247854",
-        "scraped_at": "2025-08-12T17:21:41.964516Z"
+        "scraped_at": "2025-08-12T17:54:40.247142Z"
     },
     {
         "County": "St. Louis",
@@ -599,7 +585,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Clayton",
         "Firm File#": "253006",
-        "scraped_at": "2025-08-12T17:21:41.964532Z"
+        "scraped_at": "2025-08-12T17:54:40.247157Z"
     },
     {
         "County": "Stone",
@@ -613,7 +599,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Galena",
         "Firm File#": "252070",
-        "scraped_at": "2025-08-12T17:21:41.995055Z"
+        "scraped_at": "2025-08-12T17:54:40.276365Z"
     },
     {
         "County": "Taney",
@@ -627,7 +613,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Forsyth",
         "Firm File#": "253355",
-        "scraped_at": "2025-08-12T17:21:41.995080Z"
+        "scraped_at": "2025-08-12T17:54:40.276386Z"
     },
     {
         "County": "Wright",
@@ -641,6 +627,6 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Hartville",
         "Firm File#": "253140",
-        "scraped_at": "2025-08-12T17:21:41.995100Z"
+        "scraped_at": "2025-08-12T17:54:40.276405Z"
     }
 ]
