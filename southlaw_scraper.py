@@ -35,6 +35,7 @@ zip_re   = re.compile(r"^\d{5}(?:-\d{4})?$")
 date_re  = re.compile(r"^\d{1,2}/\d{1,2}/\d{4}$", re.ASCII)
 time_re  = re.compile(r"^\d{1,2}:\d{2}(?:AM|PM)$", re.IGNORECASE)
 money_re = re.compile(r"^\$?[\d,]+(?:\.\d{2})?$")
+placeholder_set = {"—", "-", "None", "TBD", "N/A"}
 
 ignore_headings = {
     "foreclosure sales report: missouri",
@@ -122,52 +123,51 @@ def parse_pdf(content: bytes):
                 if di < 0 or not date_re.match(parts[di]):
                     continue
 
-                # Rightmost ZIP before date
+                # Rightmost ZIP before sale_date
                 zi_candidates = [idx for idx, tok in enumerate(parts[:di]) if zip_re.match(tok)]
                 if not zi_candidates:
                     continue
                 zi = zi_candidates[-1]
 
-                # From the far-right, the last two tokens must be civil case + firm file
-                if len(parts) < 3:
+                # --- Parse from the far right ---
+                idx = len(parts) - 1
+                firm_file = parts[idx]; idx -= 1
+                civil_case = parts[idx]; idx -= 1
+
+                # sale_location_city: multi-word; gather tokens until we hit opening_bid token
+                # opening_bid looks like money or placeholder (TBD, —, etc.)
+                j = idx
+                while j >= 0 and not (money_re.match(parts[j]) or parts[j] in placeholder_set):
+                    j -= 1
+                if j < 0:
+                    # couldn't find opening bid; skip this line
                     continue
-                firm_file  = parts[-1]
-                civil_case = parts[-2]
+                opening_bid = parts[j]
+                # city is tokens from j+1 to idx (inclusive)
+                sale_location_city = " ".join(parts[j+1:idx+1]) if j+1 <= idx else ""
+                idx = j - 1  # move left of opening bid
 
-                # Next to the left is sale_location (city). It can be multi-word; we’ll take exactly one token here
-                # because the PDF exports that column as a single word/city (e.g., "Clayton", "Forsyth", "KansasCity").
-                sale_location_city = parts[-3]
+                # continued date/time:
+                continued = ""
+                if idx >= 1 and date_re.match(parts[idx-1]) and time_re.match(parts[idx]):
+                    # pattern: DATE TIME
+                    continued = parts[idx-1] + " " + parts[idx]
+                    idx -= 2
+                elif idx >= 0 and (parts[idx] in placeholder_set or date_re.match(parts[idx])):
+                    # single placeholder or a single date without time
+                    continued = parts[idx]
+                    idx -= 1
+                # else: no continued value present
 
-                # To the left of sale_location & the two IDs come bid and (optionally) continued date/time.
-                # possible_continued is candidates[-4] position; check if it's a date-like value or placeholder.
-                # Layout from the right:
-                # [..., (continued?) , opening_bid, sale_location_city, civil_case, firm_file]
-                if len(parts) < 6:
-                    continue
-
-                opening_bid_token = parts[-4]
-                possible_continued = parts[-5] if len(parts) >= 5 else ""
-
-                # Detect if "possible_continued" is a date/placeholder; else treat continued as empty and
-                # shift bid to the -4 token (already captured).
-                if date_re.match(possible_continued) or possible_continued in {"—", "-", "None", "TBD", "N/A"}:
-                    continued = possible_continued
-                    opening_bid = opening_bid_token
-                else:
-                    continued = ""  # column was empty; opening_bid stays as -4
-                    opening_bid = opening_bid_token
-
-                # City is tokens between ZIP and sale_date (exclusive of date/time)
+                # City (property) is tokens between ZIP and sale_date (exclusive of date/time)
                 city = " ".join(parts[zi-1:di-1]) if zi-1 >= 0 else ""
-
-                # Address is everything before the city chunk (up to zi-2)
+                # Address is everything before that
                 address = " ".join(parts[:zi-1]) if zi-1 > 0 else ""
 
                 # Sanity: address should start with number
                 if not starts_with_number(address):
                     continue
 
-                # Keep original strings (don’t coerce money) to “display everything”
                 record = {
                     "county": current_county or "N/A",
                     "property_address": address,
@@ -175,9 +175,9 @@ def parse_pdf(content: bytes):
                     "property_zip": parts[zi],
                     "sale_date": parts[di],
                     "sale_time": parts[ti],
-                    "continued_date_time": continued,
+                    "continued_date_time": continued,          # <-- now robust
                     "opening_bid": opening_bid,
-                    "sale_location_city": sale_location_city,
+                    "sale_location_city": sale_location_city,  # multi-word handled
                     "civil_case_no": civil_case,
                     "firm_file": firm_file,
                     "scraped_at": datetime.utcnow().isoformat() + "Z",
@@ -199,9 +199,9 @@ def main():
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(records, f, indent=4)
 
-    # Also print each property row so you can see "everything from property"
+    # Print a quick preview so you can see continued date/time values
     print(f"\nExtracted {len(records)} records → {OUT}\n")
-    for r in records:
+    for r in records[:10]:
         print(
             f"[{r['county']}] {r['property_address']}, {r['property_city']} {r['property_zip']} | "
             f"Sale: {r['sale_date']} {r['sale_time']} | Continued: {r['continued_date_time'] or '—'} | "
