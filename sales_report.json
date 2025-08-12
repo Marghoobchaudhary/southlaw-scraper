@@ -6,11 +6,12 @@
         "property_zip": "65202",
         "sale_date": "8/29/2025",
         "sale_time": "9:00AM",
-        "continued_date_time": "9:00AM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Columbia",
-        "firm_file": "253139"
+        "firm_file": "253139",
+        "scraped_at": "2025-08-12T12:06:22.951185Z"
     },
     {
         "county": "Buchanan",
@@ -23,7 +24,8 @@
         "opening_bid": "N/A",
         "sale_location_city": "St.",
         "civil_case_no": "Joseph",
-        "firm_file": "235917"
+        "firm_file": "235917",
+        "scraped_at": "2025-08-12T12:06:22.951221Z"
     },
     {
         "county": "Butler",
@@ -36,7 +38,8 @@
         "opening_bid": "$107,900.00",
         "sale_location_city": "Poplar",
         "civil_case_no": "Bluff",
-        "firm_file": "251488"
+        "firm_file": "251488",
+        "scraped_at": "2025-08-12T12:06:22.951238Z"
     },
     {
         "county": "Callaway",
@@ -45,11 +48,12 @@
         "property_zip": "65043",
         "sale_date": "8/15/2025",
         "sale_time": "12:30PM",
-        "continued_date_time": "12:30PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "$56,074.72",
         "civil_case_no": "Fulton",
-        "firm_file": "252715"
+        "firm_file": "252715",
+        "scraped_at": "2025-08-12T12:06:22.951255Z"
     },
     {
         "county": "Cass",
@@ -58,11 +62,12 @@
         "property_zip": "64080",
         "sale_date": "8/25/2025",
         "sale_time": "9:00AM",
-        "continued_date_time": "9:00AM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Harrisonville",
-        "firm_file": "243587"
+        "firm_file": "243587",
+        "scraped_at": "2025-08-12T12:06:22.951269Z"
     },
     {
         "county": "Cass",
@@ -71,11 +76,12 @@
         "property_zip": "64083",
         "sale_date": "8/25/2025",
         "sale_time": "9:00AM",
-        "continued_date_time": "9:00AM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Harrisonville",
-        "firm_file": "251927"
+        "firm_file": "251927",
+        "scraped_at": "2025-08-12T12:06:22.951279Z"
     },
     {
         "county": "City of St. Louis",
@@ -88,7 +94,8 @@
         "opening_bid": "$129,800.00",
         "sale_location_city": "St.",
         "civil_case_no": "Louis",
-        "firm_file": "248121"
+        "firm_file": "248121",
+        "scraped_at": "2025-08-12T12:06:22.951296Z"
     },
     {
         "county": "Clay",
@@ -97,11 +104,12 @@
         "property_zip": "64024",
         "sale_date": "8/21/2025",
         "sale_time": "12:00PM",
-        "continued_date_time": "12:00PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Liberty",
-        "firm_file": "97505"
+        "firm_file": "97505",
+        "scraped_at": "2025-08-12T12:06:22.951310Z"
     },
     {
         "county": "Clay",
@@ -110,11 +118,12 @@
         "property_zip": "64089",
         "sale_date": "8/21/2025",
         "sale_time": "12:00PM",
-        "continued_date_time": "12:00PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Liberty",
-        "firm_file": "208811"
+        "firm_file": "208811",
+        "scraped_at": "2025-08-12T12:06:22.951320Z"
     },
     {
         "county": "Clay",
@@ -123,11 +132,12 @@
         "property_zip": "64118",
         "sale_date": "8/28/2025",
         "sale_time": "12:00PM",
-        "continued_date_time": "12:00PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Liberty",
-        "firm_file": "252318"
+        "firm_file": "252318",
+        "scraped_at": "2025-08-12T12:06:22.951331Z"
     },
     {
         "county": "Clay",
@@ -136,11 +146,12 @@
         "property_zip": "64118",
         "sale_date": "8/28/2025",
         "sale_time": "12:00PM",
-        "continued_date_time": "12:00PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Liberty",
-        "firm_file": "242645"
+        "firm_file": "242645",
+        "scraped_at": "2025-08-12T12:06:22.951341Z"
     },
     {
         "county": "Clay",
@@ -149,11 +160,12 @@
         "property_zip": "64155",
         "sale_date": "8/28/2025",
         "sale_time": "12:00PM",
-        "continued_date_time": "12:00PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Liberty",
-        "firm_file": "245509"
+        "firm_file": "245509",
+        "scraped_at": "2025-08-12T12:06:22.951352Z"
     },
     {
         "county": "Dunklin",
@@ -162,11 +174,12 @@
         "property_zip": "63855",
         "sale_date": "8/12/2025",
         "sale_time": "11:00AM",
-        "continued_date_time": "11:00AM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "$68,400.00",
         "civil_case_no": "Kennett",
-        "firm_file": "251011"
+        "firm_file": "251011",
+        "scraped_at": "2025-08-12T12:06:22.951367Z"
     },
     {
         "county": "Gasconade",
@@ -175,11 +188,12 @@
         "property_zip": "65066",
         "sale_date": "6/24/2025",
         "sale_time": "10:30AM",
-        "continued_date_time": "10:30",
+        "continued_date_time": "",
         "opening_bid": "AM",
         "sale_location_city": "N/A",
         "civil_case_no": "Hermann",
-        "firm_file": "251740"
+        "firm_file": "251740",
+        "scraped_at": "2025-08-12T12:06:23.053298Z"
     },
     {
         "county": "Greene",
@@ -188,11 +202,12 @@
         "property_zip": "65803",
         "sale_date": "8/6/2025",
         "sale_time": "11:00AM",
-        "continued_date_time": "11:00",
+        "continued_date_time": "",
         "opening_bid": "AM",
         "sale_location_city": "N/A",
         "civil_case_no": "Springfield",
-        "firm_file": "252727"
+        "firm_file": "252727",
+        "scraped_at": "2025-08-12T12:06:23.053325Z"
     },
     {
         "county": "Jackson",
@@ -201,11 +216,12 @@
         "property_zip": "64127",
         "sale_date": "7/24/2025",
         "sale_time": "1:00PM",
-        "continued_date_time": "1:00",
+        "continued_date_time": "",
         "opening_bid": "PM",
         "sale_location_city": "N/A",
         "civil_case_no": "Independence",
-        "firm_file": "252532"
+        "firm_file": "252532",
+        "scraped_at": "2025-08-12T12:06:23.053342Z"
     },
     {
         "county": "Jackson",
@@ -214,11 +230,12 @@
         "property_zip": "64055",
         "sale_date": "7/31/2025",
         "sale_time": "1:00PM",
-        "continued_date_time": "1:00",
+        "continued_date_time": "",
         "opening_bid": "PM",
         "sale_location_city": "N/A",
         "civil_case_no": "Independence",
-        "firm_file": "252939"
+        "firm_file": "252939",
+        "scraped_at": "2025-08-12T12:06:23.053354Z"
     },
     {
         "county": "Jackson",
@@ -227,11 +244,12 @@
         "property_zip": "64133",
         "sale_date": "8/14/2025",
         "sale_time": "1:00PM",
-        "continued_date_time": "1:00PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "$106,085.71",
         "civil_case_no": "Independence",
-        "firm_file": "211732"
+        "firm_file": "211732",
+        "scraped_at": "2025-08-12T12:06:23.053365Z"
     },
     {
         "county": "Jackson",
@@ -244,7 +262,8 @@
         "opening_bid": "$130,257.81",
         "sale_location_city": "Kansas",
         "civil_case_no": "City",
-        "firm_file": "253109"
+        "firm_file": "253109",
+        "scraped_at": "2025-08-12T12:06:23.053375Z"
     },
     {
         "county": "Jackson",
@@ -253,11 +272,12 @@
         "property_zip": "64034",
         "sale_date": "8/21/2025",
         "sale_time": "1:00PM",
-        "continued_date_time": "1:00PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Independence",
-        "firm_file": "252899"
+        "firm_file": "252899",
+        "scraped_at": "2025-08-12T12:06:23.053386Z"
     },
     {
         "county": "Jackson",
@@ -266,11 +286,12 @@
         "property_zip": "64052",
         "sale_date": "8/21/2025",
         "sale_time": "1:00PM",
-        "continued_date_time": "1:00PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Independence",
-        "firm_file": "249684"
+        "firm_file": "249684",
+        "scraped_at": "2025-08-12T12:06:23.053395Z"
     },
     {
         "county": "Jackson",
@@ -283,7 +304,8 @@
         "opening_bid": "N/A",
         "sale_location_city": "Kansas",
         "civil_case_no": "City",
-        "firm_file": "252598"
+        "firm_file": "252598",
+        "scraped_at": "2025-08-12T12:06:23.053405Z"
     },
     {
         "county": "Jackson",
@@ -296,7 +318,8 @@
         "opening_bid": "N/A",
         "sale_location_city": "Kansas",
         "civil_case_no": "City",
-        "firm_file": "252465"
+        "firm_file": "252465",
+        "scraped_at": "2025-08-12T12:06:23.053416Z"
     },
     {
         "county": "Jackson",
@@ -309,7 +332,8 @@
         "opening_bid": "N/A",
         "sale_location_city": "Kansas",
         "civil_case_no": "City",
-        "firm_file": "253218"
+        "firm_file": "253218",
+        "scraped_at": "2025-08-12T12:06:23.053426Z"
     },
     {
         "county": "Jackson",
@@ -318,11 +342,12 @@
         "property_zip": "64057",
         "sale_date": "8/21/2025",
         "sale_time": "1:00PM",
-        "continued_date_time": "1:00PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Independence",
-        "firm_file": "247616"
+        "firm_file": "247616",
+        "scraped_at": "2025-08-12T12:06:23.053436Z"
     },
     {
         "county": "Jackson",
@@ -331,11 +356,12 @@
         "property_zip": "64056",
         "sale_date": "8/21/2025",
         "sale_time": "1:00PM",
-        "continued_date_time": "1:00PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Independence",
-        "firm_file": "252600"
+        "firm_file": "252600",
+        "scraped_at": "2025-08-12T12:06:23.053447Z"
     },
     {
         "county": "Jackson",
@@ -348,7 +374,8 @@
         "opening_bid": "N/A",
         "sale_location_city": "Kansas",
         "civil_case_no": "City",
-        "firm_file": "251883"
+        "firm_file": "251883",
+        "scraped_at": "2025-08-12T12:06:23.053457Z"
     },
     {
         "county": "Jackson",
@@ -357,11 +384,12 @@
         "property_zip": "64063",
         "sale_date": "8/28/2025",
         "sale_time": "1:00PM",
-        "continued_date_time": "1:00PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Independence",
-        "firm_file": "253494"
+        "firm_file": "253494",
+        "scraped_at": "2025-08-12T12:06:23.053467Z"
     },
     {
         "county": "Jackson",
@@ -370,11 +398,12 @@
         "property_zip": "64055",
         "sale_date": "8/28/2025",
         "sale_time": "1:00PM",
-        "continued_date_time": "1:00PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Independence",
-        "firm_file": "248162"
+        "firm_file": "248162",
+        "scraped_at": "2025-08-12T12:06:23.053477Z"
     },
     {
         "county": "Jackson",
@@ -383,11 +412,12 @@
         "property_zip": "64050",
         "sale_date": "8/28/2025",
         "sale_time": "1:00PM",
-        "continued_date_time": "1:00PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Independence",
-        "firm_file": "253005"
+        "firm_file": "253005",
+        "scraped_at": "2025-08-12T12:06:23.053487Z"
     },
     {
         "county": "Jackson",
@@ -396,11 +426,12 @@
         "property_zip": "64081",
         "sale_date": "8/28/2025",
         "sale_time": "1:00PM",
-        "continued_date_time": "1:00PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Independence",
-        "firm_file": "252708"
+        "firm_file": "252708",
+        "scraped_at": "2025-08-12T12:06:23.053498Z"
     },
     {
         "county": "Jasper",
@@ -409,11 +440,12 @@
         "property_zip": "64801",
         "sale_date": "8/27/2025",
         "sale_time": "9:00AM",
-        "continued_date_time": "9:00AM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Carthage",
-        "firm_file": "252596"
+        "firm_file": "252596",
+        "scraped_at": "2025-08-12T12:06:23.053513Z"
     },
     {
         "county": "Jefferson",
@@ -422,11 +454,12 @@
         "property_zip": "63052",
         "sale_date": "8/14/2025",
         "sale_time": "3:30PM",
-        "continued_date_time": "3:30PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "$46,095.14",
         "civil_case_no": "Hillsboro",
-        "firm_file": "251880"
+        "firm_file": "251880",
+        "scraped_at": "2025-08-12T12:06:23.123247Z"
     },
     {
         "county": "Jefferson",
@@ -435,11 +468,12 @@
         "property_zip": "63028",
         "sale_date": "8/14/2025",
         "sale_time": "3:30PM",
-        "continued_date_time": "3:30PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "$34,970.03",
         "civil_case_no": "Hillsboro",
-        "firm_file": "247799"
+        "firm_file": "247799",
+        "scraped_at": "2025-08-12T12:06:23.123279Z"
     },
     {
         "county": "Jefferson",
@@ -448,11 +482,12 @@
         "property_zip": "63016",
         "sale_date": "8/21/2025",
         "sale_time": "3:30PM",
-        "continued_date_time": "3:30PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Hillsboro",
-        "firm_file": "247371"
+        "firm_file": "247371",
+        "scraped_at": "2025-08-12T12:06:23.123298Z"
     },
     {
         "county": "Jefferson",
@@ -461,11 +496,12 @@
         "property_zip": "63028",
         "sale_date": "8/28/2025",
         "sale_time": "3:30PM",
-        "continued_date_time": "3:30PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Hillsboro",
-        "firm_file": "246375"
+        "firm_file": "246375",
+        "scraped_at": "2025-08-12T12:06:23.123317Z"
     },
     {
         "county": "Jefferson",
@@ -474,11 +510,12 @@
         "property_zip": "63020",
         "sale_date": "8/28/2025",
         "sale_time": "3:30PM",
-        "continued_date_time": "3:30PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Hillsboro",
-        "firm_file": "251220"
+        "firm_file": "251220",
+        "scraped_at": "2025-08-12T12:06:23.123332Z"
     },
     {
         "county": "Lewis",
@@ -487,11 +524,12 @@
         "property_zip": "63471",
         "sale_date": "8/26/2025",
         "sale_time": "10:30AM",
-        "continued_date_time": "10:30AM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Monticello",
-        "firm_file": "252799"
+        "firm_file": "252799",
+        "scraped_at": "2025-08-12T12:06:23.123353Z"
     },
     {
         "county": "Mississippi",
@@ -500,11 +538,12 @@
         "property_zip": "63845",
         "sale_date": "9/3/2025",
         "sale_time": "10:00AM",
-        "continued_date_time": "10:00AM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Charleston",
-        "firm_file": "252800"
+        "firm_file": "252800",
+        "scraped_at": "2025-08-12T12:06:23.123380Z"
     },
     {
         "county": "Newton",
@@ -513,11 +552,12 @@
         "property_zip": "64850",
         "sale_date": "8/18/2025",
         "sale_time": "10:00AM",
-        "continued_date_time": "10:00AM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Neosho",
-        "firm_file": "249933"
+        "firm_file": "249933",
+        "scraped_at": "2025-08-12T12:06:23.123404Z"
     },
     {
         "county": "Pettis",
@@ -526,11 +566,12 @@
         "property_zip": "65350",
         "sale_date": "9/3/2025",
         "sale_time": "9:00AM",
-        "continued_date_time": "9:00AM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Sedalia",
-        "firm_file": "253202"
+        "firm_file": "253202",
+        "scraped_at": "2025-08-12T12:06:23.123429Z"
     },
     {
         "county": "Pike",
@@ -539,11 +580,12 @@
         "property_zip": "63353",
         "sale_date": "7/22/2025",
         "sale_time": "2:30PM",
-        "continued_date_time": "PM",
+        "continued_date_time": "",
         "opening_bid": "$69,547.04",
         "sale_location_city": "Bowling",
         "civil_case_no": "Green",
-        "firm_file": "251385"
+        "firm_file": "251385",
+        "scraped_at": "2025-08-12T12:06:23.123452Z"
     },
     {
         "county": "Ray",
@@ -552,11 +594,12 @@
         "property_zip": "64085",
         "sale_date": "8/15/2025",
         "sale_time": "9:00AM",
-        "continued_date_time": "9:00AM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "$92,455.00",
         "civil_case_no": "Richmond",
-        "firm_file": "252641"
+        "firm_file": "252641",
+        "scraped_at": "2025-08-12T12:06:23.123477Z"
     },
     {
         "county": "Ripley",
@@ -565,11 +608,12 @@
         "property_zip": "63935",
         "sale_date": "9/2/2025",
         "sale_time": "1:00PM",
-        "continued_date_time": "1:00PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Doniphan",
-        "firm_file": "251334"
+        "firm_file": "251334",
+        "scraped_at": "2025-08-12T12:06:23.123503Z"
     },
     {
         "county": "St. Francois",
@@ -578,11 +622,12 @@
         "property_zip": "63601",
         "sale_date": "8/12/2025",
         "sale_time": "2:30PM",
-        "continued_date_time": "2:30PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "$9,386.57",
         "civil_case_no": "Farmington",
-        "firm_file": "252693"
+        "firm_file": "252693",
+        "scraped_at": "2025-08-12T12:06:23.186518Z"
     },
     {
         "county": "St. Louis",
@@ -591,37 +636,40 @@
         "property_zip": "63137",
         "sale_date": "8/14/2025",
         "sale_time": "2:00PM",
-        "continued_date_time": "2:00PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "$107,051.17",
         "civil_case_no": "Clayton",
-        "firm_file": "247854"
+        "firm_file": "247854",
+        "scraped_at": "2025-08-12T12:06:23.186545Z"
     },
     {
-        "county": "Neighbor",
+        "county": "St. Louis",
         "property_address": "8431 Bridle Spur Dr",
         "property_city": "Hazelwood",
         "property_zip": "63042",
         "sale_date": "8/14/2025",
         "sale_time": "2:00PM",
-        "continued_date_time": "2:00PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "$73,900.00",
         "civil_case_no": "Clayton",
-        "firm_file": "252059"
+        "firm_file": "252059",
+        "scraped_at": "2025-08-12T12:06:23.186561Z"
     },
     {
-        "county": "Neighbor",
+        "county": "St. Louis",
         "property_address": "225 S Saint Charles St",
         "property_city": "Florissant",
         "property_zip": "63031",
         "sale_date": "8/28/2025",
         "sale_time": "2:00PM",
-        "continued_date_time": "2:00PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Clayton",
-        "firm_file": "253006"
+        "firm_file": "253006",
+        "scraped_at": "2025-08-12T12:06:23.186573Z"
     },
     {
         "county": "Stone",
@@ -630,11 +678,12 @@
         "property_zip": "65656-4504",
         "sale_date": "8/13/2025",
         "sale_time": "12:00PM",
-        "continued_date_time": "12:00PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "$76,063.32",
         "civil_case_no": "Galena",
-        "firm_file": "252070"
+        "firm_file": "252070",
+        "scraped_at": "2025-08-12T12:06:23.186588Z"
     },
     {
         "county": "Taney",
@@ -643,11 +692,12 @@
         "property_zip": "65740",
         "sale_date": "9/3/2025",
         "sale_time": "1:00PM",
-        "continued_date_time": "1:00PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Forsyth",
-        "firm_file": "253355"
+        "firm_file": "253355",
+        "scraped_at": "2025-08-12T12:06:23.186603Z"
     },
     {
         "county": "Wright",
@@ -656,10 +706,11 @@
         "property_zip": "65711",
         "sale_date": "8/27/2025",
         "sale_time": "1:00PM",
-        "continued_date_time": "1:00PM",
+        "continued_date_time": "",
         "opening_bid": "N/A",
         "sale_location_city": "N/A",
         "civil_case_no": "Hartville",
-        "firm_file": "253140"
+        "firm_file": "253140",
+        "scraped_at": "2025-08-12T12:06:23.186621Z"
     }
 ]
