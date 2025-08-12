@@ -1,124 +1,213 @@
-<?php
-/**
- * Template Name: Southlaw Scraper Report (DataTable View)
- */
-get_header();
+import requests, pdfplumber, json, re, sys
+from io import BytesIO
+from datetime import datetime
 
-function is_price($v) {
-    $v = trim((string)$v);
-    return ($v !== '' && stripos($v, 'N/A') === false && preg_match('/^\$?\d[\d,]*(\.\d{1,2})?$/', $v));
+URL = "https://www.southlaw.com/report/Sales_Report_MO.pdf"
+OUT = "sales_report.json"
+
+# ---------------- Missouri counties (plus independent city) ----------------
+COUNTY_CANON = [
+    "Adair","Andrew","Atchison","Audrain","Barry","Barton","Bates","Benton","Bollinger","Boone",
+    "Buchanan","Butler","Caldwell","Callaway","Camden","Cape Girardeau","Carroll","Carter","Cass",
+    "Cedar","Chariton","Christian","Clark","Clay","Clinton","Cole","Cooper","Crawford","Dade",
+    "Dallas","Daviess","DeKalb","Dent","Douglas","Dunklin","Franklin","Gasconade","Gentry","Greene",
+    "Grundy","Harrison","Henry","Hickory","Holt","Howard","Howell","Iron","Jackson","Jasper",
+    "Jefferson","Johnson","Knox","Laclede","Lafayette","Lawrence","Lewis","Lincoln","Linn",
+    "Livingston","Macon","Madison","Maries","Marion","McDonald","Mercer","Miller","Mississippi",
+    "Moniteau","Monroe","Montgomery","Morgan","New Madrid","Newton","Nodaway","Oregon","Osage",
+    "Ozark","Pemiscot","Perry","Pettis","Phelps","Pike","Platte","Polk","Pulaski","Putnam",
+    "Ralls","Randolph","Ray","Reynolds","Ripley","St. Charles","St. Clair","Ste. Genevieve",
+    "St. Francois","St. Louis","Saline","Schuyler","Scotland","Scott","Shannon","Shelby",
+    "Stoddard","Stone","Sullivan","Taney","Texas","Vernon","Warren","Washington","Wayne",
+    "Webster","Worth","Wright","St. Louis City",
+]
+def _norm(s: str) -> str:
+    s = s.strip().lower()
+    s = s.replace(".", "")
+    s = re.sub(r"\s+", " ", s)
+    s = s.replace("saint ", "st ")
+    return s
+COUNTY_SET_NORM = {_norm(c) for c in COUNTY_CANON}
+COUNTY_SET_NORM.update({"city of st louis"})  # common variant
+
+# ---------------- Regex / heuristics ----------------
+zip_re   = re.compile(r"^\d{5}(?:-\d{4})?$")
+date_re  = re.compile(r"^\d{1,2}/\d{1,2}/\d{4}$", re.ASCII)
+time_re  = re.compile(r"^\d{1,2}:\d{2}(?:AM|PM)$", re.IGNORECASE)
+money_re = re.compile(r"^\$?[\d,]+(?:\.\d{2})?$")
+
+ignore_headings = {
+    "foreclosure sales report: missouri",
+    "property address property city property zip sale date sale time continued date/time opening bid sale location(city) civil case no. firm file#",
+    "information reported as of",
 }
-function format_price($v) {
-    $num = preg_replace('/[^\d\.]/', '', (string)$v);
-    return ($num === '') ? 'N/A' : '$' . number_format((float)$num, 2);
-}
-function is_integer_like($v) {
-    return preg_match('/^\d+$/', trim((string)$v));
-}
-function normalize_date($v) {
-    $v = trim((string)$v);
-    if ($v === '' || stripos($v, 'N/A') !== false) return 'N/A';
-    $formats = ['n/j/Y','n/j/y','m/d/Y','m/d/y','Y-m-d'];
-    foreach ($formats as $fmt) {
-        $d = DateTime::createFromFormat($fmt, $v);
-        if ($d && $d->format($fmt) === $v) return $d->format('n/j/Y');
-    }
-    try {
-        return (new DateTime($v))->format('n/j/Y');
-    } catch (Exception $e) {
-        return 'N/A';
-    }
-}
-function extract_dates($item) {
-    $dates = [];
-    foreach ($item as $val) {
-        if (preg_match_all('/\b\d{1,2}\/\d{1,2}\/\d{2,4}\b/', $val, $matches)) {
-            foreach ($matches[0] as $date_str) {
-                $d = normalize_date($date_str);
-                if ($d !== 'N/A') $dates[] = DateTime::createFromFormat('n/j/Y', $d);
-            }
-        }
-    }
-    if (!$dates) return ['sale_date' => 'N/A', 'continued_date' => 'N/A'];
-    usort($dates, fn($a, $b) => $a <=> $b);
-    return [
-        'sale_date' => $dates[0]->format('n/j/Y'),
-        'continued_date' => (count($dates) > 1) ? end($dates)->format('n/j/Y') : 'N/A'
-    ];
-}
-function extract_zip($item) {
-    foreach ($item as $val) {
-        if (preg_match_all('/\b(\d{5})(?:-\d{4})?\b/', $val, $matches)) {
-            foreach ($matches[1] as $zip) {
-                $z = intval($zip);
-                if ($z >= 63000 && $z <= 65999) return $zip;
-            }
-        }
-    }
-    return 'N/A';
-}
-?>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
-<div class="sales-report">
-    <h1>Sales Report</h1>
-    <table id="salesTable" class="display" style="width:100%">
-        <thead>
-            <tr>
-                <th>Address</th>
-                <th>ZIP</th>
-                <th>Sale Date</th>
-                <th>Continued Date</th>
-                <th>Opening Bid</th>
-                <th>Firm File#</th>
-            </tr>
-        </thead>
-        <tbody>
-<?php
-$json_url = 'https://raw.githubusercontent.com/Marghoobchaudhary/southlaw-scraper/main/sales_report.json';
-$json = @file_get_contents($json_url);
+def is_county_heading_text(s: str) -> bool:
+    s_stripped = s.strip()
+    if not s_stripped or re.search(r"\d", s_stripped):
+        return False
+    if not re.fullmatch(r"[A-Za-z.\-'\s]+", s_stripped):
+        return False
+    words = s_stripped.split()
+    if not (1 <= len(words) <= 3 or s_stripped.lower().startswith("city of ")):
+        return False
+    return _norm(s_stripped) in COUNTY_SET_NORM
 
-if ($json) {
-    $data = json_decode($json, true);
-    if (is_array($data) && $data) {
-        foreach ($data as $item) {
-            // Skip unwanted rows
-            if (array_filter($item, fn($v) => stripos($v, 'Information Reported as of') !== false)) continue;
+def starts_with_number(text: str) -> bool:
+    return bool(re.match(r"^\d+\b", text))
 
-            // Extract dates
-            $dates_info = extract_dates($item);
-            if ($dates_info['sale_date'] === 'N/A') continue;
+def fetch_pdf_bytes(url: str) -> bytes:
+    resp = requests.get(url, timeout=45)
+    resp.raise_for_status()
+    return resp.content
 
-            $property_address = $item['property_address'] ?? 'N/A';
-            $property_zip = extract_zip($item);
-            $opening_bid = is_price($item['opening_bid'] ?? '') ? format_price($item['opening_bid']) : 'N/A';
-            $firm_file = is_integer_like($item['firm_file'] ?? '') ? $item['firm_file'] : 'N/A';
+def parse_pdf(content: bytes):
+    records = []
+    current_county = None
 
-            echo '<tr>';
-            echo '<td>' . esc_html($property_address) . '</td>';
-            echo '<td>' . esc_html($property_zip) . '</td>';
-            echo '<td>' . esc_html($dates_info['sale_date']) . '</td>';
-            echo '<td>' . esc_html($dates_info['continued_date']) . '</td>';
-            echo '<td>' . esc_html($opening_bid) . '</td>';
-            echo '<td>' . esc_html($firm_file) . '</td>';
-            echo '</tr>';
-        }
-    }
-}
-?>
-        </tbody>
-    </table>
-</div>
+    with pdfplumber.open(BytesIO(content)) as pdf:
+        for page in pdf.pages:
+            raw = page.extract_text() or ""
+            lines = [ln.strip() for ln in raw.split("\n") if ln.strip()]
 
-<script>
-jQuery(document).ready(function($) {
-    $('#salesTable').DataTable({
-        pageLength: 25,
-        order: [[2, 'asc']] // Sort by Sale Date
-    });
-});
-</script>
+            # 1) Remove obvious headers
+            cleaned = []
+            for ln in lines:
+                if any(h in ln.lower() for h in ignore_headings):
+                    continue
+                cleaned.append(ln)
 
-<?php get_footer(); ?>
+            # 2) Merge soft-wrapped fragments (e.g., "Neighbor", "Village")
+            merged = []
+            i = 0
+            while i < len(cleaned):
+                cur = cleaned[i]
+                nxt = cleaned[i+1] if i+1 < len(cleaned) else ""
+                prv = merged[-1] if merged else ""
+
+                def next_starts_with_zip(text):
+                    first = (text.split() or [""])[0]
+                    return bool(zip_re.match(first))
+
+                if (
+                    not re.search(r"\d", cur)              # no digits in fragment
+                    and not is_county_heading_text(cur)    # not a real county
+                    and merged and starts_with_number(prv) # previous looks like address row
+                    and next_starts_with_zip(nxt)          # next begins with ZIP
+                ):
+                    merged[-1] = prv + " " + cur
+                    i += 1
+                    continue
+
+                merged.append(cur)
+                i += 1
+
+            # 3) Parse rows with robust right-anchored logic
+            for line_clean in merged:
+                # County header (whitelist only)
+                if is_county_heading_text(line_clean):
+                    current_county = line_clean.strip()
+                    continue
+
+                parts = line_clean.split()
+                if len(parts) < 8:
+                    continue
+
+                # Must have a sale time token
+                time_idxs = [idx for idx, tok in enumerate(parts) if time_re.match(tok)]
+                if not time_idxs:
+                    continue
+                ti = time_idxs[-1]        # last time token
+                di = ti - 1               # date immediately before
+                if di < 0 or not date_re.match(parts[di]):
+                    continue
+
+                # Rightmost ZIP before date
+                zi_candidates = [idx for idx, tok in enumerate(parts[:di]) if zip_re.match(tok)]
+                if not zi_candidates:
+                    continue
+                zi = zi_candidates[-1]
+
+                # From the far-right, the last two tokens must be civil case + firm file
+                if len(parts) < 3:
+                    continue
+                firm_file  = parts[-1]
+                civil_case = parts[-2]
+
+                # Next to the left is sale_location (city). It can be multi-word; we’ll take exactly one token here
+                # because the PDF exports that column as a single word/city (e.g., "Clayton", "Forsyth", "KansasCity").
+                sale_location_city = parts[-3]
+
+                # To the left of sale_location & the two IDs come bid and (optionally) continued date/time.
+                # possible_continued is candidates[-4] position; check if it's a date-like value or placeholder.
+                # Layout from the right:
+                # [..., (continued?) , opening_bid, sale_location_city, civil_case, firm_file]
+                if len(parts) < 6:
+                    continue
+
+                opening_bid_token = parts[-4]
+                possible_continued = parts[-5] if len(parts) >= 5 else ""
+
+                # Detect if "possible_continued" is a date/placeholder; else treat continued as empty and
+                # shift bid to the -4 token (already captured).
+                if date_re.match(possible_continued) or possible_continued in {"—", "-", "None", "TBD", "N/A"}:
+                    continued = possible_continued
+                    opening_bid = opening_bid_token
+                else:
+                    continued = ""  # column was empty; opening_bid stays as -4
+                    opening_bid = opening_bid_token
+
+                # City is tokens between ZIP and sale_date (exclusive of date/time)
+                city = " ".join(parts[zi-1:di-1]) if zi-1 >= 0 else ""
+
+                # Address is everything before the city chunk (up to zi-2)
+                address = " ".join(parts[:zi-1]) if zi-1 > 0 else ""
+
+                # Sanity: address should start with number
+                if not starts_with_number(address):
+                    continue
+
+                # Keep original strings (don’t coerce money) to “display everything”
+                record = {
+                    "county": current_county or "N/A",
+                    "property_address": address,
+                    "property_city": city,
+                    "property_zip": parts[zi],
+                    "sale_date": parts[di],
+                    "sale_time": parts[ti],
+                    "continued_date_time": continued,
+                    "opening_bid": opening_bid,
+                    "sale_location_city": sale_location_city,
+                    "civil_case_no": civil_case,
+                    "firm_file": firm_file,
+                    "scraped_at": datetime.utcnow().isoformat() + "Z",
+                }
+                records.append(record)
+
+    return records
+
+def main():
+    try:
+        pdf_bytes = fetch_pdf_bytes(URL)
+    except Exception as e:
+        print(f"Failed to download PDF: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    records = parse_pdf(pdf_bytes)
+
+    # Save to JSON (overwrite)
+    with open(OUT, "w", encoding="utf-8") as f:
+        json.dump(records, f, indent=4)
+
+    # Also print each property row so you can see "everything from property"
+    print(f"\nExtracted {len(records)} records → {OUT}\n")
+    for r in records:
+        print(
+            f"[{r['county']}] {r['property_address']}, {r['property_city']} {r['property_zip']} | "
+            f"Sale: {r['sale_date']} {r['sale_time']} | Continued: {r['continued_date_time'] or '—'} | "
+            f"Bid: {r['opening_bid']} | Location: {r['sale_location_city']} | "
+            f"Civil: {r['civil_case_no']} | File: {r['firm_file']}"
+        )
+
+if __name__ == "__main__":
+    main()
