@@ -7,7 +7,38 @@ pdf_file = BytesIO(requests.get(url).content)
 records = []
 current_county = None
 
-# Sale-time and date detectors
+# ---------------- County whitelist (MO) ----------------
+COUNTY_CANON = [
+    "Adair","Andrew","Atchison","Audrain","Barry","Barton","Bates","Benton","Bollinger","Boone",
+    "Buchanan","Butler","Caldwell","Callaway","Camden","Cape Girardeau","Carroll","Carter","Cass",
+    "Cedar","Chariton","Christian","Clark","Clay","Clinton","Cole","Cooper","Crawford","Dade",
+    "Dallas","Daviess","DeKalb","Dent","Douglas","Dunklin","Franklin","Gasconade","Gentry","Greene",
+    "Grundy","Harrison","Henry","Hickory","Holt","Howard","Howell","Iron","Jackson","Jasper",
+    "Jefferson","Johnson","Knox","Laclede","Lafayette","Lawrence","Lewis","Lincoln","Linn",
+    "Livingston","Macon","Madison","Maries","Marion","McDonald","Mercer","Miller","Mississippi",
+    "Moniteau","Monroe","Montgomery","Morgan","New Madrid","Newton","Nodaway","Oregon","Osage",
+    "Ozark","Pemiscot","Perry","Pettis","Phelps","Pike","Platte","Polk","Pulaski","Putnam",
+    "Ralls","Randolph","Ray","Reynolds","Ripley","St. Charles","St. Clair","Ste. Genevieve",
+    "St. Francois","St. Louis","Saline","Schuyler","Scotland","Scott","Shannon","Shelby",
+    "Stoddard","Stone","Sullivan","Taney","Texas","Vernon","Warren","Washington","Wayne",
+    "Webster","Worth","Wright",
+    "St. Louis City",  # independent city
+]
+
+# Build a normalized set (strip periods, unify saint/ste)
+def _norm(s: str) -> str:
+    s = s.strip().lower()
+    s = s.replace(".", "")
+    s = re.sub(r"\s+", " ", s)
+    # unify saint -> st; ste -> ste (keep as-is but without dot)
+    s = s.replace("saint ", "st ")
+    s = s.replace("ste ", "ste ")
+    return s
+
+COUNTY_SET_NORM = {_norm(c) for c in COUNTY_CANON}
+COUNTY_SET_NORM.update({"city of st louis"})  # common variant in docs
+
+# ---------------- Regex / heuristics ----------------
 zip_re = re.compile(r"^\d{5}(?:-\d{4})?$")
 date_re = re.compile(r"^\d{1,2}/\d{1,2}/\d{4}$", re.ASCII)
 time_re = re.compile(r"^\d{1,2}:\d{2}(?:AM|PM)$", re.IGNORECASE)
@@ -19,15 +50,17 @@ ignore_headings = {
 }
 
 def is_county_heading_text(s: str) -> bool:
-    """Textual shape only (letters, spaces, dots, apostrophes, hyphens; 1–3 words)."""
-    if s.strip().startswith("City of "):
-        return True
-    if re.search(r"\d", s):
+    """Text shape + whitelist check."""
+    s_stripped = s.strip()
+    if not s_stripped or re.search(r"\d", s_stripped):
         return False
-    if not re.fullmatch(r"[A-Za-z.\-'\s]+", s):
+    if not re.fullmatch(r"[A-Za-z.\-'\s]+", s_stripped):
         return False
-    words = s.strip().split()
-    return 1 <= len(words) <= 3
+    words = s_stripped.split()
+    if not (1 <= len(words) <= 3 or s_stripped.lower().startswith("city of ")):
+        return False
+    # whitelist
+    return _norm(s_stripped) in COUNTY_SET_NORM
 
 def starts_with_number(text: str) -> bool:
     return bool(re.match(r"^\d+\b", text))
@@ -37,7 +70,7 @@ with pdfplumber.open(pdf_file) as pdf:
         raw = page.extract_text() or ""
         lines = [ln.strip() for ln in raw.split("\n") if ln.strip()]
 
-        # 1) Normalize/skip obvious headers
+        # 1) Remove obvious headers
         cleaned = []
         for ln in lines:
             low = ln.lower()
@@ -45,10 +78,7 @@ with pdfplumber.open(pdf_file) as pdf:
                 continue
             cleaned.append(ln)
 
-        # 2) Pre-merge soft-wrapped fragments belonging to the SAME row.
-        # Heuristic: a line with NO digits that is NOT a county heading and:
-        #   (a) previous line looks like an address line (starts with a number), and
-        #   (b) the NEXT line begins with a ZIP code
+        # 2) Merge soft-wrapped fragments within a row
         merged = []
         i = 0
         while i < len(cleaned):
@@ -61,8 +91,8 @@ with pdfplumber.open(pdf_file) as pdf:
                 return bool(zip_re.match(first))
 
             if (
-                not re.search(r"\d", cur)              # no digits in current fragment
-                and not is_county_heading_text(cur)    # not a county-shaped line
+                not re.search(r"\d", cur)              # no digits in fragment
+                and not is_county_heading_text(cur)    # not a county (per whitelist)
                 and merged and starts_with_number(prv) # previous looks like address row
                 and next_starts_with_zip(nxt)          # next begins with ZIP
             ):
@@ -73,29 +103,22 @@ with pdfplumber.open(pdf_file) as pdf:
             merged.append(cur)
             i += 1
 
-        # 3) Iterate merged lines with lookahead to confirm counties by context
+        # 3) Parse rows; set county only when heading passes whitelist
         for idx, line_clean in enumerate(merged):
-            # County headings must be county-shaped AND next line should start with a street number
             if is_county_heading_text(line_clean):
-                nxt = merged[idx+1] if idx+1 < len(merged) else ""
-                if starts_with_number(nxt):            # strong signal of a county header
-                    current_county = line_clean.strip()
-                    continue
-                # If not followed by an address, it's probably a wrapped city fragment; treat as data, not county.
+                current_county = line_clean.strip()
+                continue
 
-            # Likely a data row if it has at least a ZIP and a date+time pair
             parts = line_clean.split()
             if len(parts) < 10:
                 continue
 
             try:
-                # locate sale_date/time by scanning from right
                 ti = max(i for i, tok in enumerate(parts) if time_re.match(tok))
                 di = ti - 1
                 if di < 0 or not date_re.match(parts[di]):
                     continue
 
-                # ZIP should be somewhere before date; find the rightmost ZIP before di
                 zi_candidates = [i for i, tok in enumerate(parts[:di]) if zip_re.match(tok)]
                 if not zi_candidates:
                     continue
@@ -112,7 +135,6 @@ with pdfplumber.open(pdf_file) as pdf:
                 city = " ".join(parts[zi-1:di-1]) if zi-1 >= 0 else ""
                 address = " ".join(parts[:zi-1]) if zi-1 > 0 else ""
 
-                # basic sanity: address should start with a number
                 if not re.match(r"^\d+\b", address):
                     continue
 
