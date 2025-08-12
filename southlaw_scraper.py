@@ -7,13 +7,13 @@ OUTPUT_JSON = "sales_report.json"
 
 # --- Regexes / helpers ---
 zip_re   = re.compile(r"^\d{5}(?:-\d{4})?$")
-date_re  = re.compile(r"^\d{1,2}/\d{1,2}/\d{2,4}$", re.ASCII)  # allow 2- OR 4-digit year
-# allow optional space and optional periods in AM/PM (AM, A.M., PM, P.M.), any case
+date_re  = re.compile(r"^\d{1,2}/\d{1,2}/\d{2,4}$", re.ASCII)  # 2- or 4-digit year
+# allow "10:30AM", "10:30 AM", "10:30 A.M.", case-insensitive
 time_re  = re.compile(r"^\d{1,2}:\d{2}\s?(?:[APap]\.?M\.?)$", re.ASCII)
 money_re = re.compile(r"^\$?[\d,]+(?:\.\d{2})?$")
 placeholder_set = {"—", "-", "none", "tbd", "n/a"}
 
-# Header lines to ignore
+# Header lines to ignore (lowercased compare)
 ignore_headings = {
     "foreclosure sales report: missouri",
     "property address property city property zip sale date sale time continued date/time opening bid sale location(city) civil case no. firm file#",
@@ -28,9 +28,27 @@ def fetch_pdf_bytes(url: str) -> bytes:
     resp.raise_for_status()
     return resp.content
 
+def find_opening_from_right(parts):
+    """
+    From the right: firm_file, civil_case, then find opening_bid token (money or placeholder).
+    Return (opening_bid_index, sale_location_city_string, left_index_before_opening).
+    """
+    idx = len(parts) - 1
+    firm_file = parts[idx]; idx -= 1
+    civil_case = parts[idx]; idx -= 1
+
+    j = idx
+    while j >= 0 and not (money_re.match(parts[j]) or parts[j].lower() in placeholder_set):
+        j -= 1
+    if j < 0:
+        return None  # couldn't find opening bid
+    opening_bid = parts[j]
+    sale_location_city = " ".join(parts[j+1:idx+1]) if j+1 <= idx else ""
+    left_idx = j - 1  # index just left of opening bid
+    return j, sale_location_city, left_idx, civil_case, firm_file, opening_bid
+
 def parse_pdf(content: bytes):
     records = []
-
     with pdfplumber.open(BytesIO(content)) as pdf:
         for page in pdf.pages:
             raw = page.extract_text() or ""
@@ -43,9 +61,7 @@ def parse_pdf(content: bytes):
                     continue
                 cleaned.append(ln)
 
-            # 2) Merge soft-wrapped fragments that belong to a property row
-            # Heuristic: a fragment with NO digits that follows an address-like line,
-            # and the NEXT line begins with a ZIP -> it's part of the same row (e.g., "Neighbor", "Village").
+            # 2) Merge soft-wrapped fragments (e.g., "Neighbor", "Village") into prior address line
             merged = []
             i = 0
             while i < len(cleaned):
@@ -69,98 +85,78 @@ def parse_pdf(content: bytes):
                 merged.append(cur)
                 i += 1
 
-            # 3) Parse each merged line into columns
+            # 3) Parse rows using “ZIP → Sale pair” then “Continued between Sale and Opening Bid”
             for line_clean in merged:
                 parts = line_clean.split()
                 if len(parts) < 8:
                     continue
 
-                # Find Sale Time (right-anchored)
-                time_idxs = [idx for idx, tok in enumerate(parts) if time_re.match(tok)]
-                if not time_idxs:
-                    continue
-                ti = time_idxs[-1]        # last time token
-                di = ti - 1               # date immediately before
-                if di < 0 or not date_re.match(parts[di]):
-                    continue
-
-                # Rightmost ZIP before Sale Date
-                zi_candidates = [idx for idx, tok in enumerate(parts[:di]) if zip_re.match(tok)]
+                # Locate rightmost ZIP
+                zi_candidates = [idx for idx, tok in enumerate(parts) if zip_re.match(tok)]
                 if not zi_candidates:
                     continue
                 zi = zi_candidates[-1]
 
-                # From far-right: Firm File#, Civil Case No., Opening Bid, Sale Location(City), (optional) Continued Date/Time
-                idx = len(parts) - 1
-                firm_file = parts[idx]; idx -= 1
-                civil_case = parts[idx]; idx -= 1
+                # From ZIP forward, find the FIRST date/time pair -> Sale Date/Time
+                di = ti = None
+                k = zi + 1
+                while k < len(parts):
+                    if date_re.match(parts[k]):
+                        # time can be immediately next or next-next (rare spacing)
+                        if k + 1 < len(parts) and time_re.match(parts[k+1]):
+                            di, ti = k, k+1
+                            break
+                        elif k + 2 < len(parts) and time_re.match(parts[k+2]):
+                            di, ti = k, k+2
+                            break
+                    k += 1
+                if di is None or ti is None:
+                    continue  # couldn't find the sale date/time pair
 
-                # Find Opening Bid token (money or placeholder), everything between that and the two IDs is Sale Location(City)
-                j = idx
-                while j >= 0 and not (money_re.match(parts[j]) or parts[j].lower() in placeholder_set):
-                    j -= 1
-                if j < 0:
-                    # couldn't find opening bid; skip
+                # From far right, get Opening Bid / Sale Location(City) / Civil / File
+                res = find_opening_from_right(parts)
+                if not res:
                     continue
-                opening_bid = parts[j]
-                sale_location_city = " ".join(parts[j+1:idx+1]) if j+1 <= idx else ""
-                idx = j - 1  # move left of opening bid
+                ob_idx, sale_location_city, left_of_ob, civil_case, firm_file, opening_bid = res
 
-                # Continued Date/Time can be:
-                #  A) literal "Continued"/"Cont." followed by DATE [TIME]
-                #  B) DATE TIME (two tokens)
-                #  C) a single placeholder or a lone DATE
-                #  D) truly absent
-                continued = None
-
-                # Normalize a token for matching placeholders
-                def is_placeholder(tok: str) -> bool:
-                    return tok.lower() in placeholder_set
-
-                # Helper to join date+time if present at positions (d_idx, t_idx)
-                def date_time_if_present(d_idx, t_idx):
-                    if d_idx >= 0 and t_idx >= 0 and d_idx < len(parts) and t_idx < len(parts):
-                        if date_re.match(parts[d_idx]) and time_re.match(parts[t_idx]):
-                            return parts[d_idx] + " " + parts[t_idx]
-                    return None
-
-                # Case A: literal word before the date/time
-                if idx >= 0 and parts[idx].lower().rstrip(".") in {"continued", "cont"}:
-                    # expect DATE [TIME] just to the left of this label
-                    if idx >= 2:
-                        maybe = date_time_if_present(idx-2, idx-1)  # DATE TIME
-                        if maybe:
-                            continued = maybe
-                            idx -= 3
-                        elif date_re.match(parts[idx-1]):           # lone DATE
-                            continued = parts[idx-1]
-                            idx -= 2
+                # Search for Continued Date/Time BETWEEN sale time and opening bid
+                # Accept formats:
+                #  - optional "Continued"/"Cont." label
+                #  - DATE [TIME]
+                #  - single placeholder or lone DATE
+                cont = None
+                p = ti + 1
+                # Skip anything obviously part of city/address spillover (not ideal but safe)
+                while p <= left_of_ob:
+                    tok = parts[p]
+                    low = tok.lower().rstrip(".")
+                    if low in {"continued", "cont"}:
+                        p += 1
+                        continue
+                    if date_re.match(tok):
+                        # if next is a time, combine; else lone date
+                        if p + 1 <= left_of_ob and time_re.match(parts[p+1]):
+                            cont = tok + " " + parts[p+1]
+                            p += 2
+                            break
                         else:
-                            idx -= 1  # label with no valid value; drop through
+                            cont = tok
+                            p += 1
+                            break
+                    if low in placeholder_set:
+                        cont = tok
+                        p += 1
+                        break
+                    p += 1
+                if cont is None:
+                    cont = "—"  # visible placeholder if truly absent
 
-                # Case B: DATE TIME immediately to the left
-                if continued is None and idx >= 1:
-                    maybe = date_time_if_present(idx-1, idx)
-                    if maybe:
-                        continued = maybe
-                        idx -= 2
-
-                # Case C: single placeholder or lone DATE
-                if continued is None and idx >= 0:
-                    if is_placeholder(parts[idx]) or date_re.match(parts[idx]):
-                        continued = parts[idx]
-                        idx -= 1
-
-                # Case D: absent
-                if continued is None:
-                    continued = "—"
-
-                # Property City: tokens between ZIP and Sale Date (exclusive)
+                # Property City is tokens between ZIP and Sale Date (exclusive)
                 property_city = " ".join(parts[zi-1:di-1]) if zi-1 >= 0 else ""
-                # Property Address: everything before the city tokens
+                # Property Address is everything before that
                 property_address = " ".join(parts[:zi-1]) if zi-1 > 0 else ""
 
-                # Basic sanity: address should start with a number
+                # Sanity: address should start with a number
                 if not starts_with_number(property_address):
                     continue
 
@@ -170,7 +166,7 @@ def parse_pdf(content: bytes):
                     "Property Zip": parts[zi],
                     "Sale Date": parts[di],
                     "Sale Time": parts[ti],
-                    "Continued Date/Time": continued,              # <-- now robust & never empty ("—" if none)
+                    "Continued Date/Time": cont,
                     "Opening Bid": opening_bid,
                     "Sale Location(City)": sale_location_city,
                     "Civil Case No.": civil_case,
@@ -194,7 +190,7 @@ def main():
         json.dump(rows, f, indent=4)
 
     print(f"Extracted {len(rows)} records -> {OUTPUT_JSON}")
-    # Quick preview so you can verify Continued Date/Time shows up
+    # Quick preview
     for r in rows[:10]:
         print(
             f"{r['Property Address']} | {r['Property City']} {r['Property Zip']} | "
