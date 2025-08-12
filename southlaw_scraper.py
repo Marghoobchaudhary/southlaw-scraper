@@ -7,10 +7,11 @@ OUTPUT_JSON = "sales_report.json"
 
 # --- Regexes / helpers ---
 zip_re   = re.compile(r"^\d{5}(?:-\d{4})?$")
-date_re  = re.compile(r"^\d{1,2}/\d{1,2}/\d{4}$", re.ASCII)
-time_re  = re.compile(r"^\d{1,2}:\d{2}(?:AM|PM)$", re.IGNORECASE)
+date_re  = re.compile(r"^\d{1,2}/\d{1,2}/\d{2,4}$", re.ASCII)  # allow 2- OR 4-digit year
+# allow optional space and optional periods in AM/PM (AM, A.M., PM, P.M.), any case
+time_re  = re.compile(r"^\d{1,2}:\d{2}\s?(?:[APap]\.?M\.?)$", re.ASCII)
 money_re = re.compile(r"^\$?[\d,]+(?:\.\d{2})?$")
-placeholder_set = {"—", "-", "None", "TBD", "N/A"}
+placeholder_set = {"—", "-", "none", "tbd", "n/a"}
 
 # Header lines to ignore
 ignore_headings = {
@@ -96,7 +97,7 @@ def parse_pdf(content: bytes):
 
                 # Find Opening Bid token (money or placeholder), everything between that and the two IDs is Sale Location(City)
                 j = idx
-                while j >= 0 and not (money_re.match(parts[j]) or parts[j] in placeholder_set):
+                while j >= 0 and not (money_re.match(parts[j]) or parts[j].lower() in placeholder_set):
                     j -= 1
                 if j < 0:
                     # couldn't find opening bid; skip
@@ -106,17 +107,53 @@ def parse_pdf(content: bytes):
                 idx = j - 1  # move left of opening bid
 
                 # Continued Date/Time can be:
-                #  - DATE TIME (two tokens)
-                #  - one placeholder or a lone DATE
-                #  - absent
-                continued = ""
-                if idx >= 1 and date_re.match(parts[idx-1]) and time_re.match(parts[idx]):
-                    continued = parts[idx-1] + " " + parts[idx]
-                    idx -= 2
-                elif idx >= 0 and (parts[idx] in placeholder_set or date_re.match(parts[idx])):
-                    continued = parts[idx]
-                    idx -= 1
-                # else: leave empty
+                #  A) literal "Continued"/"Cont." followed by DATE [TIME]
+                #  B) DATE TIME (two tokens)
+                #  C) a single placeholder or a lone DATE
+                #  D) truly absent
+                continued = None
+
+                # Normalize a token for matching placeholders
+                def is_placeholder(tok: str) -> bool:
+                    return tok.lower() in placeholder_set
+
+                # Helper to join date+time if present at positions (d_idx, t_idx)
+                def date_time_if_present(d_idx, t_idx):
+                    if d_idx >= 0 and t_idx >= 0 and d_idx < len(parts) and t_idx < len(parts):
+                        if date_re.match(parts[d_idx]) and time_re.match(parts[t_idx]):
+                            return parts[d_idx] + " " + parts[t_idx]
+                    return None
+
+                # Case A: literal word before the date/time
+                if idx >= 0 and parts[idx].lower().rstrip(".") in {"continued", "cont"}:
+                    # expect DATE [TIME] just to the left of this label
+                    if idx >= 2:
+                        maybe = date_time_if_present(idx-2, idx-1)  # DATE TIME
+                        if maybe:
+                            continued = maybe
+                            idx -= 3
+                        elif date_re.match(parts[idx-1]):           # lone DATE
+                            continued = parts[idx-1]
+                            idx -= 2
+                        else:
+                            idx -= 1  # label with no valid value; drop through
+
+                # Case B: DATE TIME immediately to the left
+                if continued is None and idx >= 1:
+                    maybe = date_time_if_present(idx-1, idx)
+                    if maybe:
+                        continued = maybe
+                        idx -= 2
+
+                # Case C: single placeholder or lone DATE
+                if continued is None and idx >= 0:
+                    if is_placeholder(parts[idx]) or date_re.match(parts[idx]):
+                        continued = parts[idx]
+                        idx -= 1
+
+                # Case D: absent
+                if continued is None:
+                    continued = "—"
 
                 # Property City: tokens between ZIP and Sale Date (exclusive)
                 property_city = " ".join(parts[zi-1:di-1]) if zi-1 >= 0 else ""
@@ -133,12 +170,11 @@ def parse_pdf(content: bytes):
                     "Property Zip": parts[zi],
                     "Sale Date": parts[di],
                     "Sale Time": parts[ti],
-                    "Continued Date/Time": continued,
+                    "Continued Date/Time": continued,              # <-- now robust & never empty ("—" if none)
                     "Opening Bid": opening_bid,
                     "Sale Location(City)": sale_location_city,
                     "Civil Case No.": civil_case,
                     "Firm File#": firm_file,
-                    # Optional: keep when row was scraped (helpful for GitHub runs)
                     "scraped_at": datetime.utcnow().isoformat() + "Z",
                 }
                 records.append(record)
@@ -158,11 +194,11 @@ def main():
         json.dump(rows, f, indent=4)
 
     print(f"Extracted {len(rows)} records -> {OUTPUT_JSON}")
-    # Optional: print a few lines to verify "Continued Date/Time" is captured
+    # Quick preview so you can verify Continued Date/Time shows up
     for r in rows[:10]:
         print(
             f"{r['Property Address']} | {r['Property City']} {r['Property Zip']} | "
-            f"Sale: {r['Sale Date']} {r['Sale Time']} | Continued: {r['Continued Date/Time'] or '—'} | "
+            f"Sale: {r['Sale Date']} {r['Sale Time']} | Continued: {r['Continued Date/Time']} | "
             f"Bid: {r['Opening Bid']} | Loc: {r['Sale Location(City)']} | "
             f"Civil: {r['Civil Case No.']} | File: {r['Firm File#']}"
         )
