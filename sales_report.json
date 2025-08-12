@@ -53,19 +53,6 @@
     },
     {
         "county": "Cass",
-        "property_address": "1205 Hampton",
-        "property_city": "Dr",
-        "property_zip": "Raymore",
-        "sale_date": "64083",
-        "sale_time": "8/25/2025",
-        "continued_date_time": "9:00AM",
-        "opening_bid": "N/A",
-        "sale_location_city": "N/A",
-        "civil_case_no": "Harrisonville",
-        "firm_file": "251927"
-    },
-    {
-        "county": "Cass",
         "property_address": "1700 Russell Rd",
         "property_city": "Pleasant",
         "property_zip": "Hill",
@@ -76,6 +63,19 @@
         "sale_location_city": "N/A",
         "civil_case_no": "Harrisonville",
         "firm_file": "243587"
+    },
+    {
+        "county": "Cass",
+        "property_address": "1205 Hampton",
+        "property_city": "Dr",
+        "property_zip": "Raymore",
+        "sale_date": "64083",
+        "sale_time": "8/25/2025",
+        "continued_date_time": "9:00AM",
+        "opening_bid": "N/A",
+        "sale_location_city": "N/A",
+        "civil_case_no": "Harrisonville",
+        "firm_file": "251927"
     },
     {
         "county": "City of St. Louis",
@@ -495,16 +495,16 @@
     },
     {
         "county": "Mississippi",
-        "property_address": "1405 E Cypress",
-        "property_city": "St",
-        "property_zip": "Charleston",
-        "sale_date": "63834",
-        "sale_time": "8/11/2025",
+        "property_address": "401 Tyler",
+        "property_city": "East",
+        "property_zip": "Prairie",
+        "sale_date": "63845",
+        "sale_time": "9/3/2025",
         "continued_date_time": "10:00AM",
         "opening_bid": "N/A",
-        "sale_location_city": "$90,700.00",
+        "sale_location_city": "N/A",
         "civil_case_no": "Charleston",
-        "firm_file": "251963"
+        "firm_file": "252800"
     },
     {
         "county": "Newton",
@@ -580,7 +580,7 @@
         "sale_time": "8/12/2025",
         "continued_date_time": "2:30PM",
         "opening_bid": "N/A",
-        "sale_location_city": "N/A",
+        "sale_location_city": "$9,386.57",
         "civil_case_no": "Farmington",
         "firm_file": "252693"
     },
@@ -635,19 +635,6 @@
         "sale_location_city": "$76,063.32",
         "civil_case_no": "Galena",
         "firm_file": "252070"
-    },
-    {
-        "county": "Taney",
-        "property_address": "855",
-        "property_city": "Camelot",
-        "property_zip": "Cedarcreek",
-        "sale_date": "65627",
-        "sale_time": "8/11/2025",
-        "continued_date_time": "10:30AM",
-        "opening_bid": "N/A",
-        "sale_location_city": "$97,124.06",
-        "civil_case_no": "Forsyth",
-        "firm_file": "250312"
     },
     {
         "county": "Taney",
