@@ -11,7 +11,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Columbia",
         "Firm File#": "253139",
-        "scraped_at": "2025-08-13T15:54:46.331024Z"
+        "scraped_at": "2025-08-13T16:18:34.196857Z"
     },
     {
         "County": "Butler",
@@ -25,7 +25,7 @@
         "Sale Location(City)": "Poplar",
         "Civil Case No.": "Bluff",
         "Firm File#": "251488",
-        "scraped_at": "2025-08-13T15:54:46.331057Z"
+        "scraped_at": "2025-08-13T16:18:34.196897Z"
     },
     {
         "County": "Cass",
@@ -39,7 +39,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Harrisonville",
         "Firm File#": "243587",
-        "scraped_at": "2025-08-13T15:54:46.331074Z"
+        "scraped_at": "2025-08-13T16:18:34.196914Z"
     },
     {
         "County": "Cass",
@@ -53,7 +53,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Harrisonville",
         "Firm File#": "251927",
-        "scraped_at": "2025-08-13T15:54:46.331086Z"
+        "scraped_at": "2025-08-13T16:18:34.196926Z"
     },
     {
         "County": "City of St. Louis",
@@ -67,7 +67,7 @@
         "Sale Location(City)": "St.",
         "Civil Case No.": "Louis",
         "Firm File#": "248121",
-        "scraped_at": "2025-08-13T15:54:46.331105Z"
+        "scraped_at": "2025-08-13T16:18:34.196945Z"
     },
     {
         "County": "Clay",
@@ -81,7 +81,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Liberty",
         "Firm File#": "252318",
-        "scraped_at": "2025-08-13T15:54:46.331125Z"
+        "scraped_at": "2025-08-13T16:18:34.196965Z"
     },
     {
         "County": "Clay",
@@ -95,7 +95,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Liberty",
         "Firm File#": "242645",
-        "scraped_at": "2025-08-13T15:54:46.331136Z"
+        "scraped_at": "2025-08-13T16:18:34.196978Z"
     },
     {
         "County": "Clay",
@@ -109,7 +109,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Liberty",
         "Firm File#": "245509",
-        "scraped_at": "2025-08-13T15:54:46.331147Z"
+        "scraped_at": "2025-08-13T16:18:34.196989Z"
     },
     {
         "County": "Gasconade",
@@ -123,21 +123,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Hermann",
         "Firm File#": "251740",
-        "scraped_at": "2025-08-13T15:54:46.331163Z"
-    },
-    {
-        "County": "Greene",
-        "Property Address": "3664 N State Hwy AB",
-        "Property City": "Springfield",
-        "Property Zip": "65803",
-        "Sale Date": "8/6/2025",
-        "Sale Time": "11:00AM",
-        "Continued Date/Time": "8/13/2025",
-        "Opening Bid": "$17,198.31",
-        "Sale Location(City)": "",
-        "Civil Case No.": "Springfield",
-        "Firm File#": "252727",
-        "scraped_at": "2025-08-13T15:54:46.331180Z"
+        "scraped_at": "2025-08-13T16:18:34.197005Z"
     },
     {
         "County": "Iron",
@@ -151,7 +137,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Ironton",
         "Firm File#": "252798",
-        "scraped_at": "2025-08-13T15:54:46.331194Z"
+        "scraped_at": "2025-08-13T16:18:34.197019Z"
     },
     {
         "County": "Jackson",
@@ -165,7 +151,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Independence",
         "Firm File#": "252532",
-        "scraped_at": "2025-08-13T15:54:46.434759Z"
+        "scraped_at": "2025-08-13T16:18:34.304493Z"
     },
     {
         "County": "Jackson",
@@ -179,7 +165,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Independence",
         "Firm File#": "252939",
-        "scraped_at": "2025-08-13T15:54:46.434779Z"
+        "scraped_at": "2025-08-13T16:18:34.304517Z"
     },
     {
         "County": "Jackson",
@@ -193,7 +179,7 @@
         "Sale Location(City)": "Kansas",
         "Civil Case No.": "City",
         "Firm File#": "253109",
-        "scraped_at": "2025-08-13T15:54:46.434794Z"
+        "scraped_at": "2025-08-13T16:18:34.304532Z"
     },
     {
         "County": "Jackson",
@@ -207,77 +193,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Independence",
         "Firm File#": "211732",
-        "scraped_at": "2025-08-13T15:54:46.434806Z"
-    },
-    {
-        "County": "Jackson",
-        "Property Address": "308 So Cypress Ave Kansas",
-        "Property City": "City",
-        "Property Zip": "64124",
-        "Sale Date": "8/21/2025",
-        "Sale Time": "2:00PM",
-        "Continued Date/Time": "N/A",
-        "Opening Bid": "N/A",
-        "Sale Location(City)": "Kansas",
-        "Civil Case No.": "City",
-        "Firm File#": "252465",
-        "scraped_at": "2025-08-13T15:54:46.434818Z"
-    },
-    {
-        "County": "Jackson",
-        "Property Address": "3428 S Benton Avenue Kansas",
-        "Property City": "City",
-        "Property Zip": "64128",
-        "Sale Date": "8/21/2025",
-        "Sale Time": "2:00PM",
-        "Continued Date/Time": "N/A",
-        "Opening Bid": "N/A",
-        "Sale Location(City)": "Kansas",
-        "Civil Case No.": "City",
-        "Firm File#": "253218",
-        "scraped_at": "2025-08-13T15:54:46.434830Z"
-    },
-    {
-        "County": "Jackson",
-        "Property Address": "19608 E 30th St S",
-        "Property City": "Independence",
-        "Property Zip": "64057",
-        "Sale Date": "8/21/2025",
-        "Sale Time": "1:00PM",
-        "Continued Date/Time": "N/A",
-        "Opening Bid": "N/A",
-        "Sale Location(City)": "",
-        "Civil Case No.": "Independence",
-        "Firm File#": "247616",
-        "scraped_at": "2025-08-13T15:54:46.434841Z"
-    },
-    {
-        "County": "Jackson",
-        "Property Address": "15316 Hamilton Rd",
-        "Property City": "Greenwood",
-        "Property Zip": "64034",
-        "Sale Date": "8/21/2025",
-        "Sale Time": "1:00PM",
-        "Continued Date/Time": "N/A",
-        "Opening Bid": "N/A",
-        "Sale Location(City)": "",
-        "Civil Case No.": "Independence",
-        "Firm File#": "252899",
-        "scraped_at": "2025-08-13T15:54:46.434850Z"
-    },
-    {
-        "County": "Jackson",
-        "Property Address": "3035 Englewood Terrace",
-        "Property City": "Independence",
-        "Property Zip": "64052",
-        "Sale Date": "8/21/2025",
-        "Sale Time": "1:00PM",
-        "Continued Date/Time": "N/A",
-        "Opening Bid": "N/A",
-        "Sale Location(City)": "",
-        "Civil Case No.": "Independence",
-        "Firm File#": "249684",
-        "scraped_at": "2025-08-13T15:54:46.434860Z"
+        "scraped_at": "2025-08-13T16:18:34.304543Z"
     },
     {
         "County": "Jackson",
@@ -291,7 +207,77 @@
         "Sale Location(City)": "Kansas",
         "Civil Case No.": "City",
         "Firm File#": "252598",
-        "scraped_at": "2025-08-13T15:54:46.434874Z"
+        "scraped_at": "2025-08-13T16:18:34.304555Z"
+    },
+    {
+        "County": "Jackson",
+        "Property Address": "3035 Englewood Terrace",
+        "Property City": "Independence",
+        "Property Zip": "64052",
+        "Sale Date": "8/21/2025",
+        "Sale Time": "1:00PM",
+        "Continued Date/Time": "N/A",
+        "Opening Bid": "N/A",
+        "Sale Location(City)": "",
+        "Civil Case No.": "Independence",
+        "Firm File#": "249684",
+        "scraped_at": "2025-08-13T16:18:34.304565Z"
+    },
+    {
+        "County": "Jackson",
+        "Property Address": "15316 Hamilton Rd",
+        "Property City": "Greenwood",
+        "Property Zip": "64034",
+        "Sale Date": "8/21/2025",
+        "Sale Time": "1:00PM",
+        "Continued Date/Time": "N/A",
+        "Opening Bid": "N/A",
+        "Sale Location(City)": "",
+        "Civil Case No.": "Independence",
+        "Firm File#": "252899",
+        "scraped_at": "2025-08-13T16:18:34.304577Z"
+    },
+    {
+        "County": "Jackson",
+        "Property Address": "308 So Cypress Ave Kansas",
+        "Property City": "City",
+        "Property Zip": "64124",
+        "Sale Date": "8/21/2025",
+        "Sale Time": "2:00PM",
+        "Continued Date/Time": "N/A",
+        "Opening Bid": "N/A",
+        "Sale Location(City)": "Kansas",
+        "Civil Case No.": "City",
+        "Firm File#": "252465",
+        "scraped_at": "2025-08-13T16:18:34.304588Z"
+    },
+    {
+        "County": "Jackson",
+        "Property Address": "3428 S Benton Avenue Kansas",
+        "Property City": "City",
+        "Property Zip": "64128",
+        "Sale Date": "8/21/2025",
+        "Sale Time": "2:00PM",
+        "Continued Date/Time": "N/A",
+        "Opening Bid": "N/A",
+        "Sale Location(City)": "Kansas",
+        "Civil Case No.": "City",
+        "Firm File#": "253218",
+        "scraped_at": "2025-08-13T16:18:34.304600Z"
+    },
+    {
+        "County": "Jackson",
+        "Property Address": "19608 E 30th St S",
+        "Property City": "Independence",
+        "Property Zip": "64057",
+        "Sale Date": "8/21/2025",
+        "Sale Time": "1:00PM",
+        "Continued Date/Time": "N/A",
+        "Opening Bid": "N/A",
+        "Sale Location(City)": "",
+        "Civil Case No.": "Independence",
+        "Firm File#": "247616",
+        "scraped_at": "2025-08-13T16:18:34.304610Z"
     },
     {
         "County": "Jackson",
@@ -305,21 +291,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Independence",
         "Firm File#": "252600",
-        "scraped_at": "2025-08-13T15:54:46.434885Z"
-    },
-    {
-        "County": "Jackson",
-        "Property Address": "417 N Crysler Ave",
-        "Property City": "Independence",
-        "Property Zip": "64050",
-        "Sale Date": "8/28/2025",
-        "Sale Time": "1:00PM",
-        "Continued Date/Time": "N/A",
-        "Opening Bid": "N/A",
-        "Sale Location(City)": "",
-        "Civil Case No.": "Independence",
-        "Firm File#": "253005",
-        "scraped_at": "2025-08-13T15:54:46.434895Z"
+        "scraped_at": "2025-08-13T16:18:34.304620Z"
     },
     {
         "County": "Jackson",
@@ -333,7 +305,21 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Independence",
         "Firm File#": "248162",
-        "scraped_at": "2025-08-13T15:54:46.434905Z"
+        "scraped_at": "2025-08-13T16:18:34.304630Z"
+    },
+    {
+        "County": "Jackson",
+        "Property Address": "417 N Crysler Ave",
+        "Property City": "Independence",
+        "Property Zip": "64050",
+        "Sale Date": "8/28/2025",
+        "Sale Time": "1:00PM",
+        "Continued Date/Time": "N/A",
+        "Opening Bid": "N/A",
+        "Sale Location(City)": "",
+        "Civil Case No.": "Independence",
+        "Firm File#": "253005",
+        "scraped_at": "2025-08-13T16:18:34.304640Z"
     },
     {
         "County": "Jasper",
@@ -347,7 +333,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Carthage",
         "Firm File#": "252596",
-        "scraped_at": "2025-08-13T15:54:46.434921Z"
+        "scraped_at": "2025-08-13T16:18:34.304655Z"
     },
     {
         "County": "Jefferson",
@@ -361,7 +347,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Hillsboro",
         "Firm File#": "251880",
-        "scraped_at": "2025-08-13T15:54:46.434935Z"
+        "scraped_at": "2025-08-13T16:18:34.304671Z"
     },
     {
         "County": "Jefferson",
@@ -375,7 +361,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Hillsboro",
         "Firm File#": "247799",
-        "scraped_at": "2025-08-13T15:54:46.434946Z"
+        "scraped_at": "2025-08-13T16:18:34.304682Z"
     },
     {
         "County": "Jefferson",
@@ -389,21 +375,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Hillsboro",
         "Firm File#": "247371",
-        "scraped_at": "2025-08-13T15:54:46.434957Z"
-    },
-    {
-        "County": "Jefferson",
-        "Property Address": "712 Tanglewood Acres",
-        "Property City": "Festus",
-        "Property Zip": "63028",
-        "Sale Date": "8/28/2025",
-        "Sale Time": "3:30PM",
-        "Continued Date/Time": "N/A",
-        "Opening Bid": "N/A",
-        "Sale Location(City)": "",
-        "Civil Case No.": "Hillsboro",
-        "Firm File#": "246375",
-        "scraped_at": "2025-08-13T15:54:46.434967Z"
+        "scraped_at": "2025-08-13T16:18:34.304693Z"
     },
     {
         "County": "Jefferson",
@@ -417,7 +389,21 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Hillsboro",
         "Firm File#": "251220",
-        "scraped_at": "2025-08-13T15:54:46.434978Z"
+        "scraped_at": "2025-08-13T16:18:34.304704Z"
+    },
+    {
+        "County": "Jefferson",
+        "Property Address": "712 Tanglewood Acres",
+        "Property City": "Festus",
+        "Property Zip": "63028",
+        "Sale Date": "8/28/2025",
+        "Sale Time": "3:30PM",
+        "Continued Date/Time": "N/A",
+        "Opening Bid": "N/A",
+        "Sale Location(City)": "",
+        "Civil Case No.": "Hillsboro",
+        "Firm File#": "246375",
+        "scraped_at": "2025-08-13T16:18:34.304714Z"
     },
     {
         "County": "Lewis",
@@ -431,7 +417,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Monticello",
         "Firm File#": "252799",
-        "scraped_at": "2025-08-13T15:54:46.434992Z"
+        "scraped_at": "2025-08-13T16:18:34.304729Z"
     },
     {
         "County": "Mississippi",
@@ -445,7 +431,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Charleston",
         "Firm File#": "252800",
-        "scraped_at": "2025-08-13T15:54:46.498312Z"
+        "scraped_at": "2025-08-13T16:18:34.368714Z"
     },
     {
         "County": "Newton",
@@ -459,7 +445,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Neosho",
         "Firm File#": "249933",
-        "scraped_at": "2025-08-13T15:54:46.498333Z"
+        "scraped_at": "2025-08-13T16:18:34.368741Z"
     },
     {
         "County": "Pettis",
@@ -473,7 +459,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Sedalia",
         "Firm File#": "253202",
-        "scraped_at": "2025-08-13T15:54:46.498349Z"
+        "scraped_at": "2025-08-13T16:18:34.368757Z"
     },
     {
         "County": "Pike",
@@ -487,7 +473,7 @@
         "Sale Location(City)": "Bowling",
         "Civil Case No.": "Green",
         "Firm File#": "251385",
-        "scraped_at": "2025-08-13T15:54:46.498367Z"
+        "scraped_at": "2025-08-13T16:18:34.368776Z"
     },
     {
         "County": "Ray",
@@ -501,7 +487,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Richmond",
         "Firm File#": "252641",
-        "scraped_at": "2025-08-13T15:54:46.498382Z"
+        "scraped_at": "2025-08-13T16:18:34.368793Z"
     },
     {
         "County": "Ripley",
@@ -515,7 +501,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Doniphan",
         "Firm File#": "251334",
-        "scraped_at": "2025-08-13T15:54:46.498397Z"
+        "scraped_at": "2025-08-13T16:18:34.368808Z"
     },
     {
         "County": "St. Louis",
@@ -529,7 +515,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Clayton",
         "Firm File#": "247854",
-        "scraped_at": "2025-08-13T15:54:46.498413Z"
+        "scraped_at": "2025-08-13T16:18:34.368823Z"
     },
     {
         "County": "St. Louis",
@@ -543,7 +529,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Clayton",
         "Firm File#": "253006",
-        "scraped_at": "2025-08-13T15:54:46.498428Z"
+        "scraped_at": "2025-08-13T16:18:34.368839Z"
     },
     {
         "County": "Stone",
@@ -557,7 +543,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Galena",
         "Firm File#": "252070",
-        "scraped_at": "2025-08-13T15:54:46.498443Z"
+        "scraped_at": "2025-08-13T16:18:34.368854Z"
     },
     {
         "County": "Taney",
@@ -571,7 +557,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Forsyth",
         "Firm File#": "253355",
-        "scraped_at": "2025-08-13T15:54:46.498459Z"
+        "scraped_at": "2025-08-13T16:18:34.368869Z"
     },
     {
         "County": "Wright",
@@ -585,6 +571,6 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Hartville",
         "Firm File#": "253140",
-        "scraped_at": "2025-08-13T15:54:46.517833Z"
+        "scraped_at": "2025-08-13T16:18:34.388299Z"
     }
 ]
