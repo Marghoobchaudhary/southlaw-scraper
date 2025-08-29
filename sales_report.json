@@ -11,7 +11,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Mexico",
         "Firm File#": "253598",
-        "scraped_at": "2025-08-29T04:54:20.947141Z"
+        "scraped_at": "2025-08-29T05:15:40.212705Z"
     },
     {
         "County": "Benton",
@@ -25,7 +25,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Warsaw",
         "Firm File#": "252666",
-        "scraped_at": "2025-08-29T04:54:20.947173Z"
+        "scraped_at": "2025-08-29T05:15:40.212734Z"
     },
     {
         "County": "Butler",
@@ -39,7 +39,7 @@
         "Sale Location(City)": "Poplar",
         "Civil Case No.": "Bluff",
         "Firm File#": "252792",
-        "scraped_at": "2025-08-29T04:54:20.947191Z"
+        "scraped_at": "2025-08-29T05:15:40.212753Z"
     },
     {
         "County": "Camden",
@@ -53,7 +53,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Camdenton",
         "Firm File#": "250710",
-        "scraped_at": "2025-08-29T04:54:20.947207Z"
+        "scraped_at": "2025-08-29T05:15:40.212770Z"
     },
     {
         "County": "Cape Girardeau",
@@ -67,7 +67,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Jackson",
         "Firm File#": "248280",
-        "scraped_at": "2025-08-29T04:54:20.947224Z"
+        "scraped_at": "2025-08-29T05:15:40.212787Z"
     },
     {
         "County": "City of St. Louis",
@@ -81,7 +81,7 @@
         "Sale Location(City)": "St.",
         "Civil Case No.": "Louis",
         "Firm File#": "248859",
-        "scraped_at": "2025-08-29T04:54:20.947243Z"
+        "scraped_at": "2025-08-29T05:15:40.212806Z"
     },
     {
         "County": "City of St. Louis",
@@ -95,35 +95,7 @@
         "Sale Location(City)": "St.",
         "Civil Case No.": "Louis",
         "Firm File#": "252729",
-        "scraped_at": "2025-08-29T04:54:20.947255Z"
-    },
-    {
-        "County": "Clay",
-        "Property Address": "2421 NE Vivion Rd Kansas",
-        "Property City": "City",
-        "Property Zip": "64118",
-        "Sale Date": "8/28/2025",
-        "Sale Time": "12:00PM",
-        "Continued Date/Time": "N/A",
-        "Opening Bid": "$142,228.79",
-        "Sale Location(City)": "",
-        "Civil Case No.": "Liberty",
-        "Firm File#": "242645",
-        "scraped_at": "2025-08-29T04:54:20.947271Z"
-    },
-    {
-        "County": "Clay",
-        "Property Address": "1509 Northeast 99th Street Kansas",
-        "Property City": "City",
-        "Property Zip": "64155",
-        "Sale Date": "8/28/2025",
-        "Sale Time": "12:00PM",
-        "Continued Date/Time": "N/A",
-        "Opening Bid": "$192,700.00",
-        "Sale Location(City)": "",
-        "Civil Case No.": "Liberty",
-        "Firm File#": "245509",
-        "scraped_at": "2025-08-29T04:54:20.947282Z"
+        "scraped_at": "2025-08-29T05:15:40.212819Z"
     },
     {
         "County": "Clay",
@@ -137,35 +109,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Liberty",
         "Firm File#": "246710",
-        "scraped_at": "2025-08-29T04:54:20.947293Z"
-    },
-    {
-        "County": "Clay",
-        "Property Address": "3903 NE 52nd Ter Kansas",
-        "Property City": "City",
-        "Property Zip": "64119",
-        "Sale Date": "9/11/2025",
-        "Sale Time": "12:00PM",
-        "Continued Date/Time": "N/A",
-        "Opening Bid": "N/A",
-        "Sale Location(City)": "",
-        "Civil Case No.": "Liberty",
-        "Firm File#": "253607",
-        "scraped_at": "2025-08-29T04:54:20.947303Z"
-    },
-    {
-        "County": "Clay",
-        "Property Address": "702 N Grove St",
-        "Property City": "Kearney",
-        "Property Zip": "64060",
-        "Sale Date": "9/11/2025",
-        "Sale Time": "12:00PM",
-        "Continued Date/Time": "N/A",
-        "Opening Bid": "N/A",
-        "Sale Location(City)": "",
-        "Civil Case No.": "Liberty",
-        "Firm File#": "253214",
-        "scraped_at": "2025-08-29T04:54:20.947314Z"
+        "scraped_at": "2025-08-29T05:15:40.212834Z"
     },
     {
         "County": "Clay",
@@ -179,7 +123,35 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Liberty",
         "Firm File#": "250792",
-        "scraped_at": "2025-08-29T04:54:20.947324Z"
+        "scraped_at": "2025-08-29T05:15:40.212845Z"
+    },
+    {
+        "County": "Clay",
+        "Property Address": "702 N Grove St",
+        "Property City": "Kearney",
+        "Property Zip": "64060",
+        "Sale Date": "9/11/2025",
+        "Sale Time": "12:00PM",
+        "Continued Date/Time": "N/A",
+        "Opening Bid": "N/A",
+        "Sale Location(City)": "",
+        "Civil Case No.": "Liberty",
+        "Firm File#": "253214",
+        "scraped_at": "2025-08-29T05:15:40.212856Z"
+    },
+    {
+        "County": "Clay",
+        "Property Address": "3903 NE 52nd Ter Kansas",
+        "Property City": "City",
+        "Property Zip": "64119",
+        "Sale Date": "9/11/2025",
+        "Sale Time": "12:00PM",
+        "Continued Date/Time": "N/A",
+        "Opening Bid": "N/A",
+        "Sale Location(City)": "",
+        "Civil Case No.": "Liberty",
+        "Firm File#": "253607",
+        "scraped_at": "2025-08-29T05:15:40.212866Z"
     },
     {
         "County": "Clay",
@@ -193,7 +165,21 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Liberty",
         "Firm File#": "253441",
-        "scraped_at": "2025-08-29T04:54:20.947334Z"
+        "scraped_at": "2025-08-29T05:15:40.212877Z"
+    },
+    {
+        "County": "Clay",
+        "Property Address": "9834 N Home Ave Kansas",
+        "Property City": "City",
+        "Property Zip": "64157",
+        "Sale Date": "9/25/2025",
+        "Sale Time": "12:00PM",
+        "Continued Date/Time": "N/A",
+        "Opening Bid": "N/A",
+        "Sale Location(City)": "",
+        "Civil Case No.": "Liberty",
+        "Firm File#": "253838",
+        "scraped_at": "2025-08-29T05:15:40.212887Z"
     },
     {
         "County": "Gasconade",
@@ -207,7 +193,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Hermann",
         "Firm File#": "251740",
-        "scraped_at": "2025-08-29T04:54:21.030174Z"
+        "scraped_at": "2025-08-29T05:15:40.291333Z"
     },
     {
         "County": "Greene",
@@ -221,7 +207,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Springfield",
         "Firm File#": "253230",
-        "scraped_at": "2025-08-29T04:54:21.030196Z"
+        "scraped_at": "2025-08-29T05:15:40.291356Z"
     },
     {
         "County": "Hickory",
@@ -235,7 +221,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Hermitage",
         "Firm File#": "249941",
-        "scraped_at": "2025-08-29T04:54:21.030214Z"
+        "scraped_at": "2025-08-29T05:15:40.291373Z"
     },
     {
         "County": "Iron",
@@ -249,7 +235,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Ironton",
         "Firm File#": "252798",
-        "scraped_at": "2025-08-29T04:54:21.030229Z"
+        "scraped_at": "2025-08-29T05:15:40.291389Z"
     },
     {
         "County": "Jackson",
@@ -263,7 +249,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Independence",
         "Firm File#": "252532",
-        "scraped_at": "2025-08-29T04:54:21.030245Z"
+        "scraped_at": "2025-08-29T05:15:40.291405Z"
     },
     {
         "County": "Jackson",
@@ -277,35 +263,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Independence",
         "Firm File#": "252939",
-        "scraped_at": "2025-08-29T04:54:21.030258Z"
-    },
-    {
-        "County": "Jackson",
-        "Property Address": "4737 S Union Avenue",
-        "Property City": "Independence",
-        "Property Zip": "64055",
-        "Sale Date": "8/28/2025",
-        "Sale Time": "1:00PM",
-        "Continued Date/Time": "N/A",
-        "Opening Bid": "$198,703.21",
-        "Sale Location(City)": "",
-        "Civil Case No.": "Independence",
-        "Firm File#": "248162",
-        "scraped_at": "2025-08-29T04:54:21.030270Z"
-    },
-    {
-        "County": "Jackson",
-        "Property Address": "7404 E 56th Ter Kansas",
-        "Property City": "City",
-        "Property Zip": "64129",
-        "Sale Date": "9/11/2025",
-        "Sale Time": "1:00PM",
-        "Continued Date/Time": "N/A",
-        "Opening Bid": "N/A",
-        "Sale Location(City)": "",
-        "Civil Case No.": "Independence",
-        "Firm File#": "249260",
-        "scraped_at": "2025-08-29T04:54:21.030281Z"
+        "scraped_at": "2025-08-29T05:15:40.291418Z"
     },
     {
         "County": "Jackson",
@@ -319,21 +277,21 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Independence",
         "Firm File#": "253157",
-        "scraped_at": "2025-08-29T04:54:21.030292Z"
+        "scraped_at": "2025-08-29T05:15:40.291435Z"
     },
     {
         "County": "Jackson",
-        "Property Address": "2200 NW Harbor Pl Blue",
-        "Property City": "Springs",
-        "Property Zip": "64015",
+        "Property Address": "7404 E 56th Ter Kansas",
+        "Property City": "City",
+        "Property Zip": "64129",
         "Sale Date": "9/11/2025",
         "Sale Time": "1:00PM",
         "Continued Date/Time": "N/A",
         "Opening Bid": "N/A",
         "Sale Location(City)": "",
         "Civil Case No.": "Independence",
-        "Firm File#": "253097",
-        "scraped_at": "2025-08-29T04:54:21.030303Z"
+        "Firm File#": "249260",
+        "scraped_at": "2025-08-29T05:15:40.291446Z"
     },
     {
         "County": "Jackson",
@@ -347,7 +305,21 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Independence",
         "Firm File#": "247146",
-        "scraped_at": "2025-08-29T04:54:21.030312Z"
+        "scraped_at": "2025-08-29T05:15:40.291456Z"
+    },
+    {
+        "County": "Jackson",
+        "Property Address": "2200 NW Harbor Pl Blue",
+        "Property City": "Springs",
+        "Property Zip": "64015",
+        "Sale Date": "9/11/2025",
+        "Sale Time": "1:00PM",
+        "Continued Date/Time": "N/A",
+        "Opening Bid": "N/A",
+        "Sale Location(City)": "",
+        "Civil Case No.": "Independence",
+        "Firm File#": "253097",
+        "scraped_at": "2025-08-29T05:15:40.291466Z"
     },
     {
         "County": "Jackson",
@@ -361,35 +333,21 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Independence",
         "Firm File#": "253081",
-        "scraped_at": "2025-08-29T04:54:21.030326Z"
+        "scraped_at": "2025-08-29T05:15:40.291475Z"
     },
     {
-        "County": "Jefferson",
-        "Property Address": "11249 Castle Ranch Rd De",
-        "Property City": "Soto",
-        "Property Zip": "63020",
-        "Sale Date": "8/28/2025",
-        "Sale Time": "3:30PM",
+        "County": "Jackson",
+        "Property Address": "404 Huntington Dr S",
+        "Property City": "Greenwood",
+        "Property Zip": "64034",
+        "Sale Date": "9/18/2025",
+        "Sale Time": "1:00PM",
         "Continued Date/Time": "N/A",
-        "Opening Bid": "$63,226.31",
+        "Opening Bid": "N/A",
         "Sale Location(City)": "",
-        "Civil Case No.": "Hillsboro",
-        "Firm File#": "251220",
-        "scraped_at": "2025-08-29T04:54:21.030341Z"
-    },
-    {
-        "County": "Jefferson",
-        "Property Address": "712 Tanglewood Acres",
-        "Property City": "Festus",
-        "Property Zip": "63028",
-        "Sale Date": "8/28/2025",
-        "Sale Time": "3:30PM",
-        "Continued Date/Time": "N/A",
-        "Opening Bid": "$189,000.00",
-        "Sale Location(City)": "",
-        "Civil Case No.": "Hillsboro",
-        "Firm File#": "246375",
-        "scraped_at": "2025-08-29T04:54:21.030352Z"
+        "Civil Case No.": "Independence",
+        "Firm File#": "243988",
+        "scraped_at": "2025-08-29T05:15:40.291485Z"
     },
     {
         "County": "Jefferson",
@@ -403,7 +361,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Hillsboro",
         "Firm File#": "242320",
-        "scraped_at": "2025-08-29T04:54:21.030362Z"
+        "scraped_at": "2025-08-29T05:15:40.291499Z"
     },
     {
         "County": "Linn",
@@ -417,7 +375,35 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Linneus",
         "Firm File#": "253353",
-        "scraped_at": "2025-08-29T04:54:21.097137Z"
+        "scraped_at": "2025-08-29T05:15:40.291513Z"
+    },
+    {
+        "County": "Livingston",
+        "Property Address": "1817 Fairchild Street",
+        "Property City": "Chillicothe",
+        "Property Zip": "64601",
+        "Sale Date": "9/26/2025",
+        "Sale Time": "1:00PM",
+        "Continued Date/Time": "N/A",
+        "Opening Bid": "N/A",
+        "Sale Location(City)": "",
+        "Civil Case No.": "Chillicothe",
+        "Firm File#": "249160",
+        "scraped_at": "2025-08-29T05:15:40.354398Z"
+    },
+    {
+        "County": "Macon",
+        "Property Address": "518 Mearns Dr",
+        "Property City": "Macon",
+        "Property Zip": "63552",
+        "Sale Date": "9/23/2025",
+        "Sale Time": "11:00AM",
+        "Continued Date/Time": "N/A",
+        "Opening Bid": "N/A",
+        "Sale Location(City)": "",
+        "Civil Case No.": "Macon",
+        "Firm File#": "245267",
+        "scraped_at": "2025-08-29T05:15:40.354420Z"
     },
     {
         "County": "Miller",
@@ -431,7 +417,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Tuscumbia",
         "Firm File#": "253704",
-        "scraped_at": "2025-08-29T04:54:21.097165Z"
+        "scraped_at": "2025-08-29T05:15:40.354437Z"
     },
     {
         "County": "Mississippi",
@@ -445,7 +431,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Charleston",
         "Firm File#": "252800",
-        "scraped_at": "2025-08-29T04:54:21.097182Z"
+        "scraped_at": "2025-08-29T05:15:40.354453Z"
     },
     {
         "County": "Moniteau",
@@ -459,7 +445,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "California",
         "Firm File#": "253481",
-        "scraped_at": "2025-08-29T04:54:21.097198Z"
+        "scraped_at": "2025-08-29T05:15:40.354469Z"
     },
     {
         "County": "Moniteau",
@@ -473,7 +459,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "California",
         "Firm File#": "253674",
-        "scraped_at": "2025-08-29T04:54:21.097209Z"
+        "scraped_at": "2025-08-29T05:15:40.354480Z"
     },
     {
         "County": "Newton",
@@ -487,7 +473,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Neosho",
         "Firm File#": "247077",
-        "scraped_at": "2025-08-29T04:54:21.097223Z"
+        "scraped_at": "2025-08-29T05:15:40.354495Z"
     },
     {
         "County": "Pemiscot",
@@ -501,7 +487,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Caruthersville",
         "Firm File#": "250090",
-        "scraped_at": "2025-08-29T04:54:21.097237Z"
+        "scraped_at": "2025-08-29T05:15:40.354509Z"
     },
     {
         "County": "Pettis",
@@ -515,7 +501,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Sedalia",
         "Firm File#": "253202",
-        "scraped_at": "2025-08-29T04:54:21.097252Z"
+        "scraped_at": "2025-08-29T05:15:40.354523Z"
     },
     {
         "County": "Pike",
@@ -529,7 +515,7 @@
         "Sale Location(City)": "Bowling",
         "Civil Case No.": "Green",
         "Firm File#": "251385",
-        "scraped_at": "2025-08-29T04:54:21.097269Z"
+        "scraped_at": "2025-08-29T05:15:40.354540Z"
     },
     {
         "County": "Platte",
@@ -543,7 +529,7 @@
         "Sale Location(City)": "Platte",
         "Civil Case No.": "City",
         "Firm File#": "253170",
-        "scraped_at": "2025-08-29T04:54:21.097285Z"
+        "scraped_at": "2025-08-29T05:15:40.448414Z"
     },
     {
         "County": "Platte",
@@ -557,7 +543,7 @@
         "Sale Location(City)": "Platte",
         "Civil Case No.": "City",
         "Firm File#": "253721",
-        "scraped_at": "2025-08-29T04:54:21.097296Z"
+        "scraped_at": "2025-08-29T05:15:40.448436Z"
     },
     {
         "County": "Ray",
@@ -571,7 +557,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Richmond",
         "Firm File#": "252350",
-        "scraped_at": "2025-08-29T04:54:21.188789Z"
+        "scraped_at": "2025-08-29T05:15:40.448454Z"
     },
     {
         "County": "Ripley",
@@ -585,7 +571,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Doniphan",
         "Firm File#": "251334",
-        "scraped_at": "2025-08-29T04:54:21.188814Z"
+        "scraped_at": "2025-08-29T05:15:40.448470Z"
     },
     {
         "County": "St. Charles",
@@ -599,7 +585,7 @@
         "Sale Location(City)": "St.",
         "Civil Case No.": "Charles",
         "Firm File#": "228725",
-        "scraped_at": "2025-08-29T04:54:21.188849Z"
+        "scraped_at": "2025-08-29T05:15:40.448489Z"
     },
     {
         "County": "St. Charles",
@@ -613,7 +599,7 @@
         "Sale Location(City)": "St.",
         "Civil Case No.": "Charles",
         "Firm File#": "253411",
-        "scraped_at": "2025-08-29T04:54:21.188863Z"
+        "scraped_at": "2025-08-29T05:15:40.448500Z"
     },
     {
         "County": "St. Francois",
@@ -627,21 +613,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Farmington",
         "Firm File#": "253479",
-        "scraped_at": "2025-08-29T04:54:21.188879Z"
-    },
-    {
-        "County": "St. Louis",
-        "Property Address": "225 S Saint Charles St",
-        "Property City": "Florissant",
-        "Property Zip": "63031",
-        "Sale Date": "8/28/2025",
-        "Sale Time": "2:00PM",
-        "Continued Date/Time": "N/A",
-        "Opening Bid": "$90,000.00",
-        "Sale Location(City)": "",
-        "Civil Case No.": "Clayton",
-        "Firm File#": "253006",
-        "scraped_at": "2025-08-29T04:54:21.188895Z"
+        "scraped_at": "2025-08-29T05:15:40.448517Z"
     },
     {
         "County": "St. Louis",
@@ -655,7 +627,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Clayton",
         "Firm File#": "235927",
-        "scraped_at": "2025-08-29T04:54:21.188905Z"
+        "scraped_at": "2025-08-29T05:15:40.448536Z"
     },
     {
         "County": "St. Louis",
@@ -669,7 +641,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Clayton",
         "Firm File#": "250495",
-        "scraped_at": "2025-08-29T04:54:21.188916Z"
+        "scraped_at": "2025-08-29T05:15:40.448547Z"
     },
     {
         "County": "St. Louis",
@@ -683,7 +655,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Clayton",
         "Firm File#": "249240",
-        "scraped_at": "2025-08-29T04:54:21.188926Z"
+        "scraped_at": "2025-08-29T05:15:40.448557Z"
     },
     {
         "County": "St. Louis",
@@ -697,7 +669,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Clayton",
         "Firm File#": "249511",
-        "scraped_at": "2025-08-29T04:54:21.188937Z"
+        "scraped_at": "2025-08-29T05:15:40.448567Z"
     },
     {
         "County": "St. Louis",
@@ -711,7 +683,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Clayton",
         "Firm File#": "253417",
-        "scraped_at": "2025-08-29T04:54:21.188947Z"
+        "scraped_at": "2025-08-29T05:15:40.448578Z"
     },
     {
         "County": "St. Louis",
@@ -725,7 +697,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Clayton",
         "Firm File#": "253609",
-        "scraped_at": "2025-08-29T04:54:21.188957Z"
+        "scraped_at": "2025-08-29T05:15:40.448588Z"
     },
     {
         "County": "St. Louis",
@@ -739,7 +711,35 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Clayton",
         "Firm File#": "252723",
-        "scraped_at": "2025-08-29T04:54:21.188967Z"
+        "scraped_at": "2025-08-29T05:15:40.448597Z"
+    },
+    {
+        "County": "St. Louis",
+        "Property Address": "2291 Crestroyal Ct Des",
+        "Property City": "Peres",
+        "Property Zip": "63131",
+        "Sale Date": "9/18/2025",
+        "Sale Time": "2:00PM",
+        "Continued Date/Time": "N/A",
+        "Opening Bid": "N/A",
+        "Sale Location(City)": "",
+        "Civil Case No.": "Clayton",
+        "Firm File#": "253599",
+        "scraped_at": "2025-08-29T05:15:40.448607Z"
+    },
+    {
+        "County": "St. Louis",
+        "Property Address": "8205 Midwood Ave Saint",
+        "Property City": "Louis",
+        "Property Zip": "63134",
+        "Sale Date": "9/18/2025",
+        "Sale Time": "2:00PM",
+        "Continued Date/Time": "N/A",
+        "Opening Bid": "N/A",
+        "Sale Location(City)": "",
+        "Civil Case No.": "Clayton",
+        "Firm File#": "253794",
+        "scraped_at": "2025-08-29T05:15:40.448643Z"
     },
     {
         "County": "Stone",
@@ -753,7 +753,7 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Galena",
         "Firm File#": "253346",
-        "scraped_at": "2025-08-29T04:54:21.188982Z"
+        "scraped_at": "2025-08-29T05:15:40.473224Z"
     },
     {
         "County": "Taney",
@@ -767,6 +767,6 @@
         "Sale Location(City)": "",
         "Civil Case No.": "Forsyth",
         "Firm File#": "253355",
-        "scraped_at": "2025-08-29T04:54:21.188996Z"
+        "scraped_at": "2025-08-29T05:15:40.473254Z"
     }
 ]
